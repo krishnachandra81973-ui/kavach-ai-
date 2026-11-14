@@ -1,0 +1,78 @@
+/* Kavach AI Custom Stylesheet */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap');
+
+:root {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-devanagari: 'Noto Sans Devanagari', 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+.font-devanagari {
+  font-family: var(--font-devanagari);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #090d16;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Dynamic Threat Theme States */
+.threat-critical {
+  background: linear-gradient(135deg, rgba(69, 10, 10, 0.9) 0%, rgba(153, 27, 27, 0.8) 100%);
+  border-color: rgba(239, 68, 68, 0.5) !important;
+  box-shadow: 0 0 35px -5px rgba(239, 68, 68, 0.25);
+}
+
+.threat-critical #threatLevelBadge {
+  background-color: rgba(220, 38, 38, 0.25);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.5);
+}
+
+.threat-suspicious {
+  background: linear-gradient(135deg, rgba(67, 20, 7, 0.9) 0%, rgba(146, 64, 14, 0.8) 100%);
+  border-color: rgba(245, 158, 11, 0.5) !important;
+  box-shadow: 0 0 35px -5px rgba(245, 158, 11, 0.25);
+}
+
+.threat-suspicious #threatLevelBadge {
+  background-color: rgba(217, 119, 6, 0.25);
+  color: #fde68a;
+  border: 1px solid rgba(245, 158, 11, 0.5);
+}
+
+.threat-safe {
+  background: linear-gradient(135deg, rgba(6, 44, 30, 0.9) 0%, rgba(6, 78, 59, 0.8) 100%);
+  border-color: rgba(16, 185, 129, 0.5) !important;
+  box-shadow: 0 0 35px -5px rgba(16, 185, 129, 0.25);
+}
+
+.threat-safe #threatLevelBadge {
+  background-color: rgba(5, 150, 105, 0.25);
+  color: #6ee7b7;
+  border: 1px solid rgba(16, 185, 129, 0.5);
+}
+
+/* Subtle glow badge */
+@keyframes softPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(0.98); }
+}
+
+.soft-pulse {
+  animation: softPulse 2.5s infinite ease-in-out;
+}

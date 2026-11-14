@@ -38,6 +38,7 @@ templates = Jinja2Templates(directory=TEMPLATES_DIR)
 
 
 @app.get("/", response_class=HTMLResponse)
+@app.get("/api", response_class=HTMLResponse)
 async def serve_homepage(request: Request):
     """
     Renders the Kavach AI web interface.
@@ -57,6 +58,7 @@ async def serve_homepage(request: Request):
 
 
 @app.post("/api/analyze/text", response_model=AnalysisResponse)
+@app.post("/analyze/text", response_model=AnalysisResponse)
 async def analyze_text_endpoint(payload: TextAnalysisRequest):
     """
     Analyzes pasted text, SMS, WhatsApp forwards, or transcribed notices.
@@ -72,6 +74,7 @@ async def analyze_text_endpoint(payload: TextAnalysisRequest):
 
 
 @app.post("/api/analyze/upload", response_model=AnalysisResponse)
+@app.post("/analyze/upload", response_model=AnalysisResponse)
 async def analyze_file_endpoint(
     file: UploadFile = File(...),
     text_prompt: Optional[str] = Form(None),
@@ -96,6 +99,7 @@ async def analyze_file_endpoint(
 
 
 @app.get("/api/samples")
+@app.get("/samples")
 async def get_test_samples():
     """
     Provides pre-built realistic test samples for instant verification across all 3 pillars.
@@ -155,6 +159,7 @@ async def get_test_samples():
 
 
 @app.get("/api/legal-rules")
+@app.get("/legal-rules")
 async def get_legal_rules():
     """
     Returns legal statutes and citizen rights under Indian law for awareness.
@@ -174,6 +179,7 @@ async def get_legal_rules():
 
 
 @app.get("/api/health")
+@app.get("/health")
 async def health_check():
     """Health status endpoint."""
     return {
