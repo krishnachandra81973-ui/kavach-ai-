@@ -42,11 +42,6 @@ async def serve_homepage(request: Request):
     """
     Renders the Kavach AI web interface.
     """
-    if request.query_params.get("debug") == "1":
-        return JSONResponse({
-            "scope_path": request.scope.get("path"),
-            "headers": dict(request.headers)
-        })
     gemini_ready = GeminiAnalyzer.is_configured()
     return templates.TemplateResponse(
         request=request,
