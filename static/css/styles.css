@@ -1,78 +1,128 @@
-/* Kavach AI Custom Stylesheet */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap');
+/* Kavach AI Ultra-Modern Cyberpunk / Glassmorphism Stylesheet */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
 :root {
-  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-devanagari: 'Noto Sans Devanagari', 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
 body {
   font-family: var(--font-sans);
+  background-color: #030712;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(6, 182, 212, 0.12) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.5) 0px, transparent 100%),
+    radial-gradient(at 80% 100%, rgba(239, 68, 68, 0.08) 0px, transparent 50%);
+  background-attachment: fixed;
 }
 
 .font-devanagari {
   font-family: var(--font-devanagari);
 }
 
-/* Custom scrollbar */
+.font-mono-code {
+  font-family: var(--font-mono);
+}
+
+/* Custom Cyber Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: #090d16;
+  background: #030712;
 }
 ::-webkit-scrollbar-thumb {
   background: #1e293b;
-  border-radius: 4px;
+  border-radius: 9999px;
+  border: 1px solid #334155;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #0ea5e9;
 }
 
-/* Dynamic Threat Theme States */
-.threat-critical {
-  background: linear-gradient(135deg, rgba(69, 10, 10, 0.9) 0%, rgba(153, 27, 27, 0.8) 100%);
-  border-color: rgba(239, 68, 68, 0.5) !important;
-  box-shadow: 0 0 35px -5px rgba(239, 68, 68, 0.25);
+/* Glassmorphism Cards */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
 }
 
-.threat-critical #threatLevelBadge {
-  background-color: rgba(220, 38, 38, 0.25);
-  color: #fca5a5;
-  border: 1px solid rgba(239, 68, 68, 0.5);
+.glass-panel-glow {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.15), 0 20px 50px rgba(0, 0, 0, 0.5);
 }
 
-.threat-suspicious {
-  background: linear-gradient(135deg, rgba(67, 20, 7, 0.9) 0%, rgba(146, 64, 14, 0.8) 100%);
-  border-color: rgba(245, 158, 11, 0.5) !important;
-  box-shadow: 0 0 35px -5px rgba(245, 158, 11, 0.25);
+/* Threat Result Color Themes */
+.threat-critical-glow {
+  background: linear-gradient(135deg, rgba(69, 10, 10, 0.95) 0%, rgba(153, 27, 27, 0.9) 100%);
+  border: 1px solid rgba(239, 68, 68, 0.6) !important;
+  box-shadow: 0 0 40px rgba(239, 68, 68, 0.35), 0 20px 50px rgba(0, 0, 0, 0.6);
 }
 
-.threat-suspicious #threatLevelBadge {
-  background-color: rgba(217, 119, 6, 0.25);
-  color: #fde68a;
-  border: 1px solid rgba(245, 158, 11, 0.5);
+.threat-suspicious-glow {
+  background: linear-gradient(135deg, rgba(67, 20, 7, 0.95) 0%, rgba(180, 83, 9, 0.9) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.6) !important;
+  box-shadow: 0 0 40px rgba(245, 158, 11, 0.35), 0 20px 50px rgba(0, 0, 0, 0.6);
 }
 
-.threat-safe {
-  background: linear-gradient(135deg, rgba(6, 44, 30, 0.9) 0%, rgba(6, 78, 59, 0.8) 100%);
-  border-color: rgba(16, 185, 129, 0.5) !important;
-  box-shadow: 0 0 35px -5px rgba(16, 185, 129, 0.25);
+.threat-safe-glow {
+  background: linear-gradient(135deg, rgba(6, 44, 30, 0.95) 0%, rgba(6, 95, 70, 0.9) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.6) !important;
+  box-shadow: 0 0 40px rgba(16, 185, 129, 0.35), 0 20px 50px rgba(0, 0, 0, 0.6);
 }
 
-.threat-safe #threatLevelBadge {
-  background-color: rgba(5, 150, 105, 0.25);
-  color: #6ee7b7;
-  border: 1px solid rgba(16, 185, 129, 0.5);
+/* Audio Waveform Equalizer Animation */
+.equalizer-bar {
+  display: inline-block;
+  width: 3px;
+  background-color: #38bdf8;
+  border-radius: 9999px;
+  animation: equalize 1s infinite ease-in-out;
+}
+.equalizer-bar:nth-child(1) { height: 8px; animation-delay: 0.1s; }
+.equalizer-bar:nth-child(2) { height: 16px; animation-delay: 0.3s; }
+.equalizer-bar:nth-child(3) { height: 12px; animation-delay: 0.2s; }
+.equalizer-bar:nth-child(4) { height: 20px; animation-delay: 0.4s; }
+.equalizer-bar:nth-child(5) { height: 10px; animation-delay: 0.15s; }
+
+@keyframes equalize {
+  0%, 100% { transform: scaleY(0.4); }
+  50% { transform: scaleY(1.3); }
 }
 
-/* Subtle glow badge */
-@keyframes softPulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.85; transform: scale(0.98); }
+/* Pulsing Badge Beacon */
+@keyframes beaconGlow {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
 }
 
-.soft-pulse {
-  animation: softPulse 2.5s infinite ease-in-out;
+.beacon-pulse {
+  animation: beaconGlow 2s infinite;
+}
+
+/* Toast Notification Animation */
+#toastNotification {
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+#toastNotification.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Circular Gauge Animation */
+.gauge-circle {
+  transition: stroke-dashoffset 1s ease-in-out, stroke 0.5s ease;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
 }
