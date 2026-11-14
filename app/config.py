@@ -86,6 +86,27 @@ DANGEROUS_PERMISSIONS: Dict[str, Dict[str, str]] = {
     }
 }
 
+# Suspicious Phishing TLDs and Obfuscation Domains
+SUSPICIOUS_TLDS: Set[str] = {
+    ".xyz", ".online", ".site", ".top", ".info", ".live", ".cc", ".click",
+    ".buzz", ".club", ".icu", ".work", ".shop", ".vip", ".space", ".fit",
+    ".link", ".tk", ".ml", ".ga", ".cf", ".gq"
+}
+
+# Suspicious URL Shorteners (often used in WhatsApp phishing to mask destinations)
+SUSPICIOUS_SHORTENERS: Set[str] = {
+    "bit.ly", "tinyurl.com", "cutt.ly", "is.gd", "rb.gy", "t.me", "wa.me",
+    "shorturl.at", "bl.ink", "rebrand.ly"
+}
+
+# Law Enforcement & Judicial keywords that must never appear in unauthorized commercial domains
+GOV_AGENCY_DOMAIN_KEYWORDS: Set[str] = {
+    "pmkisan", "yojana", "gov", "nic", "sarkar", "seva", "portal",
+    "cbi", "police", "court", "rbi", "parivahan", "challan", "cybercrime",
+    "incometax", "mha", "trai", "uidai", "aadhaar", "highcourt", "supremecourt",
+    "narcotics", "enforcement", "ed-gov"
+}
+
 # Suspicious APK Filename Patterns in India
 SUSPICIOUS_APK_PATTERNS: List[str] = [
     r"wedding.*\.apk",
