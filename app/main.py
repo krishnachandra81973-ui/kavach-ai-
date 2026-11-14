@@ -38,6 +38,8 @@ templates = Jinja2Templates(directory=TEMPLATES_DIR)
 
 
 @app.get("/", response_class=HTMLResponse)
+@app.get("/api/index", response_class=HTMLResponse)
+@app.get("/api/index/", response_class=HTMLResponse)
 async def serve_homepage(request: Request):
     """
     Renders the Kavach AI web interface.
