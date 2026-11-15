@@ -92,3 +92,55 @@ def test_analyze_file_upload_apk():
     assert data["category"] == "MALICIOUS_APK"
     assert data["apk_analysis"] is not None
     assert len(data["apk_analysis"]["dangerous_permissions"]) > 0
+
+
+def test_whatsapp_webhook_verification():
+    # Successful challenge handshake
+    response = client.get(
+        "/api/webhook/whatsapp",
+        params={
+            "hub.mode": "subscribe",
+            "hub.verify_token": "kavach_verify_token_2026",
+            "hub.challenge": "1158201444"
+        }
+    )
+    assert response.status_code == 200
+    assert response.text == "1158201444"
+
+    # Failed handshake with invalid token
+    bad_response = client.get(
+        "/api/webhook/whatsapp",
+        params={
+            "hub.mode": "subscribe",
+            "hub.verify_token": "wrong_token",
+            "hub.challenge": "1158201444"
+        }
+    )
+    assert bad_response.status_code == 403
+
+
+def test_whatsapp_webhook_incoming_message():
+    # Simulate Meta WhatsApp Cloud API incoming message
+    payload = {
+        "entry": [{
+            "changes": [{
+                "value": {
+                    "messages": [{
+                        "from": "919876543210",
+                        "type": "text",
+                        "text": {
+                            "body": "CBI Cyber Cell Delhi: You are in Digital Arrest. Join Skype video call immediately."
+                        }
+                    }]
+                }
+            }]
+        }]
+    }
+    response = client.post("/api/webhook/whatsapp", json=payload)
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "success"
+    assert data["threat_level"] in ["CRITICAL", "SUSPICIOUS"]
+    assert data["category"] == "DIGITAL_ARREST"
+    assert "1930" in data["whatsapp_reply_message"]
+

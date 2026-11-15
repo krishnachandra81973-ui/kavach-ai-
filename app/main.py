@@ -189,3 +189,94 @@ async def health_check():
         "gemini_configured": GeminiAnalyzer.is_configured(),
         "fallback_engine": "Kavach Heuristic Engine Active",
     }
+
+
+# ==============================================================================
+# WHATSAPP CLOUD API / TWILIO WEBHOOK ENDPOINTS
+# ==============================================================================
+@app.get("/api/webhook/whatsapp")
+@app.get("/webhook/whatsapp")
+async def verify_whatsapp_webhook(request: Request):
+    """
+    Verification challenge handshake for Meta WhatsApp Cloud API Webhook.
+    Meta sends GET request with hub.mode, hub.challenge, and hub.verify_token.
+    """
+    params = request.query_params
+    mode = params.get("hub.mode")
+    token = params.get("hub.verify_token")
+    challenge = params.get("hub.challenge", "")
+
+    expected_token = os.getenv("WHATSAPP_VERIFY_TOKEN", "kavach_verify_token_2026")
+    if mode == "subscribe" and token == expected_token:
+        from fastapi.responses import PlainTextResponse
+        return PlainTextResponse(content=challenge, status_code=200)
+
+    from fastapi.responses import PlainTextResponse
+    return PlainTextResponse(content="Verification failed", status_code=403)
+
+
+@app.post("/api/webhook/whatsapp")
+@app.post("/webhook/whatsapp")
+async def handle_whatsapp_webhook(request: Request):
+    """
+    Receives forwarded WhatsApp messages / images / documents from Meta Cloud API or Twilio.
+    Instantly runs the Kavach forensic engine and returns a structured fraud audit response.
+    """
+    try:
+        body = await request.json()
+    except Exception:
+        body = {}
+
+    extracted_text = ""
+    sender_phone = ""
+
+    # Parse standard Meta WhatsApp Cloud API payload format
+    try:
+        entries = body.get("entry", [])
+        if entries:
+            changes = entries[0].get("changes", [])
+            if changes:
+                value = changes[0].get("value", {})
+                messages = value.get("messages", [])
+                if messages:
+                    msg = messages[0]
+                    sender_phone = msg.get("from", "")
+                    if msg.get("type") == "text":
+                        extracted_text = msg.get("text", {}).get("body", "")
+                    elif msg.get("type") == "image":
+                        extracted_text = msg.get("image", {}).get("caption", "WhatsApp Image forwarded for forensic audit")
+                    elif msg.get("type") == "document":
+                        extracted_text = msg.get("document", {}).get("filename", "WhatsApp Document")
+    except Exception:
+        pass
+
+    # Direct testing or Twilio payload fallback
+    if not extracted_text:
+        extracted_text = body.get("text") or body.get("message") or body.get("Body") or ""
+        sender_phone = body.get("from") or body.get("From") or sender_phone
+
+    if not extracted_text.strip():
+        return JSONResponse(
+            content={"status": "ignored", "reason": "No text content found in WhatsApp payload"},
+            status_code=200
+        )
+
+    # Run Kavach AI Forensic Engine
+    orchestrator = ForensicOrchestrator()
+    result = await orchestrator.analyze(text=extracted_text)
+
+    return JSONResponse(
+        content={
+            "status": "success",
+            "sender": sender_phone,
+            "threat_level": result.threat_level.value,
+            "threat_score": result.threat_score,
+            "category": result.category.value,
+            "whatsapp_reply_message": result.whatsapp_sos_text,
+            "immediate_actions": result.immediate_actions_hi,
+            "helpline": CYBER_HELPLINE,
+            "portal": "https://cybercrime.gov.in"
+        },
+        status_code=200
+    )
+
