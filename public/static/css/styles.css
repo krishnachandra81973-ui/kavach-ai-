@@ -6,19 +6,19 @@
   --font-devanagari: 'Noto Sans Devanagari', 'Plus Jakarta Sans', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   
-  /* Alabaster Light Palette (Default) */
-  --bg-canvas: #F8F9FA;
+  /* Luxury Alabaster Cream Light Palette (Default) */
+  --bg-canvas: #FAF7F2;
   --panel-bg: #FFFFFF;
-  --panel-hero-bg: linear-gradient(145deg, #FFFFFF 0%, #F8F9FA 100%);
-  --border-hairline: rgba(0, 0, 0, 0.08);
-  --border-subtle: #E2E8F0;
-  --text-primary: #0F172A;
-  --text-secondary: #334155;
-  --text-muted: #64748B;
-  --card-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.04), 0 2px 6px rgba(15, 23, 42, 0.02);
-  --hero-shadow: 0 15px 40px -10px rgba(15, 23, 42, 0.06), 0 2px 8px rgba(15, 23, 42, 0.02);
-  --input-bg: #F8FAFC;
-  --pill-bg: #F1F5F9;
+  --panel-hero-bg: linear-gradient(145deg, #FFFFFF 0%, #FAF5ED 100%);
+  --border-hairline: rgba(28, 25, 23, 0.08);
+  --border-subtle: #E8E2D8;
+  --text-primary: #1C1917;
+  --text-secondary: #44403C;
+  --text-muted: #78716C;
+  --card-shadow: 0 10px 30px -5px rgba(28, 25, 23, 0.04), 0 2px 6px rgba(28, 25, 23, 0.02);
+  --hero-shadow: 0 15px 40px -10px rgba(28, 25, 23, 0.06), 0 2px 8px rgba(28, 25, 23, 0.02);
+  --input-bg: #F8F6F1;
+  --pill-bg: #EFEAE1;
 }
 
 /* Obsidian Dark Palette (Flagship Tier) */
