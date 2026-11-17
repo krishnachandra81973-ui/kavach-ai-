@@ -1,57 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kavach AI (कवच एआई) — National Cyber Scam, Digital Arrest & Malicious APK Shield</title>
   
+  <!-- Prevent Theme Flash -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('kavach_theme');
+      if (savedTheme === 'light') {
+        document.documentElement.classList.remove('dark');
+      } else {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            obsidian: {
+              canvas: '#090A0F',
+              surface: '#11141C',
+              card: '#161A26',
+              border: 'rgba(255, 255, 255, 0.08)',
+              hover: '#1C2130'
+            }
+          }
+        }
+      }
+    }
+  </script>
   
   <!-- Google Fonts: Plus Jakarta Sans, Noto Sans Devanagari, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   
-  <!-- Custom Luxury Light Cream Stylesheet -->
+  <!-- Executive Theme Stylesheet -->
   <link rel="stylesheet" href="/static/css/styles.css">
 </head>
-<body class="bg-[#FAF7F2] text-stone-900 min-h-screen flex flex-col font-sans antialiased selection:bg-amber-100 selection:text-stone-900">
+<body class="bg-[#F8F9FA] dark:bg-[#090A0F] text-slate-900 dark:text-slate-100 min-h-screen flex flex-col font-sans antialiased selection:bg-amber-500/20 selection:text-amber-500 transition-colors duration-300">
 
   <!-- TOP HEADER / NAV -->
-  <header class="border-b border-[#EAE3D6] bg-white/95 backdrop-blur-xl sticky top-0 z-50 transition-all shadow-[0_2px_10px_-2px_rgba(40,30,20,0.03)]">
+  <header class="border-b border-black/[0.08] dark:border-white/[0.08] bg-white/95 dark:bg-[#0E1118]/95 backdrop-blur-xl sticky top-0 z-50 transition-all shadow-[0_2px_10px_-2px_rgba(0,0,0,0.05)]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       
       <!-- Brand Logo & Live Badge -->
       <div class="flex items-center space-x-3.5">
-        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-slate-900 via-indigo-950 to-blue-900 flex items-center justify-center shadow-md shadow-stone-900/10 ring-2 ring-amber-500/30 relative group">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-slate-950 via-indigo-950 to-blue-900 flex items-center justify-center shadow-md shadow-black/20 ring-1 ring-white/20 relative group">
           <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
           </svg>
-          <span class="absolute -top-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full beacon-pulse border-2 border-white"></span>
+          <span class="absolute -top-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full beacon-pulse border-2 border-white dark:border-[#0E1118]"></span>
         </div>
         <div>
           <div class="flex items-center space-x-2.5">
-            <span class="text-2xl font-black tracking-tight text-stone-900">KAVACH AI</span>
-            <span class="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200 uppercase tracking-widest font-mono">v1.0</span>
+            <span class="text-2xl font-black tracking-tight text-slate-900 dark:text-white">KAVACH AI</span>
+            <span class="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 uppercase tracking-widest font-mono">v1.0 PROD</span>
           </div>
-          <p class="text-xs text-stone-500 hidden sm:block font-medium" data-i18n="tagline">National Cyber Scam, Digital Arrest & Malicious APK Shield</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 hidden sm:block font-medium" data-i18n="tagline">National Cyber Scam, Digital Arrest & Malicious APK Shield</p>
         </div>
       </div>
 
-      <!-- Quick Action: Emergency Helpline 1930 & Language Toggle -->
-      <div class="flex items-center space-x-3 sm:space-x-4">
+      <!-- Quick Actions: Theme Toggle, Helpline 1930 & Language Toggle -->
+      <div class="flex items-center space-x-2.5 sm:space-x-4">
         
+        <!-- Executive Theme Toggle Button -->
+        <button id="themeToggleBtn" type="button" class="p-2.5 rounded-xl border border-black/[0.08] dark:border-white/[0.12] bg-black/5 dark:bg-white/[0.06] text-slate-700 dark:text-slate-200 hover:bg-black/10 dark:hover:bg-white/[0.12] transition shadow-sm" title="Toggle Obsidian Dark / Alabaster Light theme" aria-label="Toggle Theme">
+          <!-- Sun Icon (Shown in Dark Mode) -->
+          <svg id="themeIconSun" class="w-4 h-4 text-amber-400 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 9H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <!-- Moon Icon (Shown in Light Mode) -->
+          <svg id="themeIconMoon" class="w-4 h-4 text-slate-700 block dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+
         <!-- Live Helpline Pill -->
-        <a href="tel:1930" class="flex items-center space-x-2 px-3.5 py-1.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold hover:bg-rose-100 hover:border-rose-300 transition shadow-sm group">
+        <a href="tel:1930" class="flex items-center space-x-2 px-3 sm:px-3.5 py-1.5 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-600 dark:text-rose-400 text-xs font-bold hover:bg-rose-500/20 transition shadow-sm group">
           <span class="w-2.5 h-2.5 rounded-full bg-rose-600 animate-pulse"></span>
-          <span>Helpline: <strong class="text-rose-900 group-hover:underline">1930</strong></span>
+          <span>Helpline: <strong class="text-rose-700 dark:text-rose-300 group-hover:underline">1930</strong></span>
         </a>
 
         <!-- Language Switcher Pill -->
-        <div class="flex items-center bg-[#F3ECE1] rounded-xl p-1 border border-[#E3D9CB] shadow-inner">
-          <button id="langEnBtn" class="px-3 py-1.5 rounded-lg bg-stone-900 text-white font-bold text-xs transition shadow-sm">EN</button>
-          <button id="langHiBtn" class="px-3 py-1.5 rounded-lg text-stone-700 hover:text-stone-950 text-xs font-semibold font-devanagari transition">हिन्दी</button>
+        <div class="flex items-center bg-black/5 dark:bg-white/[0.06] rounded-xl p-1 border border-black/[0.08] dark:border-white/[0.08]">
+          <button id="langEnBtn" class="px-2.5 sm:px-3 py-1.5 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-xs transition shadow-sm">EN</button>
+          <button id="langHiBtn" class="px-2.5 sm:px-3 py-1.5 rounded-lg text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white text-xs font-semibold font-devanagari transition">हिन्दी</button>
         </div>
 
       </div>
@@ -62,12 +104,23 @@
   <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 space-y-8">
 
     <!-- HERO SECTION -->
-    <div class="relative overflow-hidden rounded-3xl cream-panel-hero p-6 sm:p-10 border border-[#E8DFD1]">
+    <div class="relative overflow-hidden rounded-3xl cream-panel-hero p-6 sm:p-10 border border-black/[0.08] dark:border-white/[0.08]">
       <div class="relative z-10 max-w-3xl space-y-4">
         
+        <!-- Live Threat Telemetry Ticker -->
+        <div class="w-full overflow-hidden rounded-xl bg-black/5 dark:bg-white/[0.04] border border-black/[0.08] dark:border-white/[0.08] py-2 px-3 flex items-center space-x-3 text-xs">
+          <span class="flex items-center space-x-1.5 px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-400 font-mono font-bold uppercase tracking-wider text-[10px] shrink-0">
+            <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+            <span data-i18n="ticker_badge">LIVE THREAT TICKER</span>
+          </span>
+          <div id="threatTickerText" class="truncate text-slate-700 dark:text-slate-300 font-mono text-[11px] flex-1">
+            🚨 [CBI EXTORTION] Maharashtra Cyber Cell warns: Fraudsters using fake arrest warrants on WhatsApp video calls.
+          </div>
+        </div>
+
         <!-- Top Pill Tag -->
-        <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#F4EDE2] border border-[#DDD3C2] text-amber-900 shadow-sm">
-          <svg class="w-3.5 h-3.5 text-amber-700" viewBox="0 0 24 24" fill="currentColor">
+        <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-amber-500/10 border border-amber-500/20 text-amber-700 dark:text-amber-400 shadow-sm">
+          <svg class="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" viewBox="0 0 24 24" fill="currentColor">
             <circle cx="12" cy="12" r="10" fill="#FF9933"/>
             <circle cx="12" cy="12" r="4" fill="#000080"/>
           </svg>
@@ -75,115 +128,115 @@
         </div>
 
         <!-- Big Hero Title -->
-        <h1 class="text-3xl sm:text-5xl font-black text-stone-900 tracking-tight leading-tight" data-i18n="hero_title">
-          Don't Panic, Verify. Stop <span class="text-rose-600 underline decoration-rose-300 decoration-wavy">Digital Arrests</span> & WhatsApp Frauds.
+        <h1 class="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight" data-i18n="hero_title">
+          Don't Panic, Verify. Stop <span class="text-rose-600 dark:text-rose-400 underline decoration-rose-400/40 decoration-wavy">Digital Arrests</span> & WhatsApp Frauds.
         </h1>
 
         <!-- Subtitle -->
-        <p class="text-stone-600 text-sm sm:text-base leading-relaxed font-normal" data-i18n="hero_desc">
+        <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed font-normal" data-i18n="hero_desc">
           Instant forensic verification of fake police/CBI warrants under Indian statutory law (<strong>BNSS 2023 / CrPC</strong>), detection of fake <strong>5G recharge doles</strong>, and static security inspection of <strong>Wedding Card / Utility APK Trojans</strong> before they steal your bank OTPs.
         </p>
 
       </div>
 
       <!-- Background Ambient Warm Glow -->
-      <div class="absolute -right-16 -bottom-16 w-80 h-80 bg-gradient-to-tr from-amber-200/40 via-orange-100/20 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -right-16 -bottom-16 w-80 h-80 bg-gradient-to-tr from-amber-500/20 via-indigo-500/10 to-transparent rounded-full blur-3xl pointer-events-none"></div>
     </div>
 
     <!-- LIVE METRICS & TRUST COUNTERS -->
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
       
-      <div class="cream-panel rounded-2xl p-4.5 hover:border-rose-300 transition group bg-white">
+      <div class="cream-panel rounded-2xl p-4.5 hover:border-rose-400/40 transition group">
         <div class="flex items-center justify-between">
-          <span class="text-2xl sm:text-3xl font-black text-rose-600 font-mono-code" data-i18n="stat_losses">₹1,750+ Cr</span>
-          <span class="p-2 rounded-xl bg-rose-50 text-rose-700 text-sm font-bold">
+          <span class="text-2xl sm:text-3xl font-black text-rose-600 dark:text-rose-400 font-mono-code" data-i18n="stat_losses">₹1,750+ Cr</span>
+          <span class="p-2 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 text-sm font-bold">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
             </svg>
           </span>
         </div>
-        <p class="text-xs text-stone-800 font-bold mt-1" data-i18n="stat_losses_title">Extorted in India (2024–26)</p>
-        <p class="text-[11px] text-stone-500 mt-0.5" data-i18n="stat_losses_sub">Reported citizen losses</p>
+        <p class="text-xs text-slate-800 dark:text-slate-200 font-bold mt-1" data-i18n="stat_losses_title">Extorted in India (2024–26)</p>
+        <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5" data-i18n="stat_losses_sub">Reported citizen losses</p>
       </div>
 
-      <div class="cream-panel rounded-2xl p-4.5 hover:border-blue-300 transition group bg-white">
+      <div class="cream-panel rounded-2xl p-4.5 hover:border-blue-400/40 transition group">
         <div class="flex items-center justify-between">
-          <span class="text-2xl sm:text-3xl font-black text-blue-700 font-mono-code" data-i18n="stat_law">BNSS §41</span>
-          <span class="p-2 rounded-xl bg-blue-50 text-blue-700 text-sm font-bold">
+          <span class="text-2xl sm:text-3xl font-black text-blue-600 dark:text-blue-400 font-mono-code" data-i18n="stat_law">BNSS §41</span>
+          <span class="p-2 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 text-sm font-bold">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
             </svg>
           </span>
         </div>
-        <p class="text-xs text-stone-800 font-bold mt-1" data-i18n="stat_law_title">Indian Law Encoded</p>
-        <p class="text-[11px] text-stone-500 mt-0.5" data-i18n="stat_law_sub">Prohibits video-call arrests</p>
+        <p class="text-xs text-slate-800 dark:text-slate-200 font-bold mt-1" data-i18n="stat_law_title">Indian Law Encoded</p>
+        <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5" data-i18n="stat_law_sub">Prohibits video-call arrests</p>
       </div>
 
-      <div class="cream-panel rounded-2xl p-4.5 hover:border-amber-300 transition group bg-white">
+      <div class="cream-panel rounded-2xl p-4.5 hover:border-amber-400/40 transition group">
         <div class="flex items-center justify-between">
-          <span class="text-2xl sm:text-3xl font-black text-amber-600 font-mono-code" data-i18n="stat_engine">&lt; 0.2s</span>
-          <span class="p-2 rounded-xl bg-amber-50 text-amber-700 text-sm font-bold">
+          <span class="text-2xl sm:text-3xl font-black text-amber-600 dark:text-amber-400 font-mono-code" data-i18n="stat_engine">&lt; 0.2s</span>
+          <span class="p-2 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 text-sm font-bold">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
           </span>
         </div>
-        <p class="text-xs text-stone-800 font-bold mt-1" data-i18n="stat_engine_title">Instant Heuristic Engine</p>
-        <p class="text-[11px] text-stone-500 mt-0.5" data-i18n="stat_engine_sub">100% offline-ready fallback</p>
+        <p class="text-xs text-slate-800 dark:text-slate-200 font-bold mt-1" data-i18n="stat_engine_title">Instant Heuristic Engine</p>
+        <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5" data-i18n="stat_engine_sub">100% offline-ready fallback</p>
       </div>
 
-      <div class="cream-panel rounded-2xl p-4.5 hover:border-emerald-300 transition group bg-white">
+      <div class="cream-panel rounded-2xl p-4.5 hover:border-emerald-400/40 transition group">
         <div class="flex items-center justify-between">
-          <span class="text-2xl sm:text-3xl font-black text-emerald-600 font-mono-code" data-i18n="stat_free">100% FREE</span>
-          <span class="p-2 rounded-xl bg-emerald-50 text-emerald-700 text-sm font-bold">
+          <span class="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400 font-mono-code" data-i18n="stat_free">100% FREE</span>
+          <span class="p-2 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-sm font-bold">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
             </svg>
           </span>
         </div>
-        <p class="text-xs text-stone-800 font-bold mt-1" data-i18n="stat_free_title">Citizen Defense Shield</p>
-        <p class="text-[11px] text-stone-500 mt-0.5" data-i18n="stat_free_sub">Public good initiative</p>
+        <p class="text-xs text-slate-800 dark:text-slate-200 font-bold mt-1" data-i18n="stat_free_title">Citizen Defense Shield</p>
+        <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5" data-i18n="stat_free_sub">Public good initiative</p>
       </div>
 
     </div>
 
     <!-- PRE-LOADED REALISTIC SAMPLES BAR -->
-    <div class="cream-panel rounded-2xl p-4 sm:p-5 border border-[#E9E2D8] bg-white">
+    <div class="cream-panel rounded-2xl p-4 sm:p-5 border border-black/[0.08] dark:border-white/[0.08]">
       <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3 sm:gap-4">
         
         <div class="flex items-center space-x-2.5">
-          <div class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center font-bold text-sm">
+          <div class="w-8 h-8 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold text-sm">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
           </div>
           <div>
-            <span class="text-xs font-black uppercase tracking-wider text-stone-900 block" data-i18n="samples_heading">Try Real-Life Scam Samples:</span>
-            <span class="text-[11px] text-stone-500" data-i18n="samples_sub">Click any card to auto-load and verify live</span>
+            <span class="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-white block" data-i18n="samples_heading">Try Real-Life Scam Samples:</span>
+            <span class="text-[11px] text-slate-500 dark:text-slate-400" data-i18n="samples_sub">Click any card to auto-load and verify live</span>
           </div>
         </div>
 
         <!-- Sample Pills Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-2 w-full lg:w-auto" id="samplesContainer">
           
-          <button onclick="loadSample('sample_digital_arrest')" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-rose-50/70 hover:bg-rose-100/90 border border-rose-200 text-rose-900 transition text-left group">
+          <button id="sampleBtn1" onclick="loadSample('sample_digital_arrest')" class="sample-btn flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/20 text-rose-700 dark:text-rose-300 transition text-left group">
             <span class="text-xs font-bold truncate" data-i18n="sample_1_btn">Digital Arrest Notice</span>
-            <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-rose-200 text-rose-800 border border-rose-300 ml-2" data-i18n="sample_1_tag">CBI FAKE</span>
+            <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-700 dark:text-rose-300 border border-rose-500/30 ml-2" data-i18n="sample_1_tag">CBI FAKE</span>
           </button>
 
-          <button onclick="loadSample('sample_free_recharge')" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-amber-50/70 hover:bg-amber-100/90 border border-amber-200 text-amber-900 transition text-left group">
+          <button id="sampleBtn2" onclick="loadSample('sample_free_recharge')" class="sample-btn flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/20 text-amber-700 dark:text-amber-300 transition text-left group">
             <span class="text-xs font-bold truncate" data-i18n="sample_2_btn">84-Day Free 5G Offer</span>
-            <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-amber-200 text-amber-800 border border-amber-300 ml-2" data-i18n="sample_2_tag">PHISHING</span>
+            <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-500/30 ml-2" data-i18n="sample_2_tag">PHISHING</span>
           </button>
 
-          <button onclick="loadSample('sample_wedding_apk')" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-purple-50/70 hover:bg-purple-100/90 border border-purple-200 text-purple-900 transition text-left group">
+          <button id="sampleBtn3" onclick="loadSample('sample_wedding_apk')" class="sample-btn flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/20 text-purple-700 dark:text-purple-300 transition text-left group" title="Tests authentic APK trojan bytes">
             <span class="text-xs font-bold truncate" data-i18n="sample_3_btn">Wedding Card .APK</span>
-            <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-purple-200 text-purple-800 border border-purple-300 ml-2" data-i18n="sample_3_tag">MALWARE</span>
+            <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-500/30 ml-2" data-i18n="sample_3_tag">MALWARE</span>
           </button>
 
-          <button onclick="loadSample('sample_legitimate')" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-emerald-50/70 hover:bg-emerald-100/90 border border-emerald-200 text-emerald-900 transition text-left group">
+          <button id="sampleBtn4" onclick="loadSample('sample_legitimate')" class="sample-btn flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/20 text-emerald-700 dark:text-emerald-300 transition text-left group">
             <span class="text-xs font-bold truncate" data-i18n="sample_4_btn">BSES Bill Payment</span>
-            <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-emerald-200 text-emerald-800 border border-emerald-300 ml-2" data-i18n="sample_4_tag">SAFE</span>
+            <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 ml-2" data-i18n="sample_4_tag">SAFE</span>
           </button>
 
         </div>
@@ -194,108 +247,269 @@
     <!-- MAIN TWO-COLUMN WORKBENCH -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
-      <!-- LEFT COLUMN: INPUT WORKBENCH -->
+      <!-- LEFT COLUMN: INPUT WORKBENCH & SIMULATOR -->
       <div class="lg:col-span-6 space-y-6">
         
-        <div class="cream-panel rounded-3xl p-6 sm:p-7 shadow-xl space-y-6 border border-[#E8DFD1] bg-white">
+        <div class="cream-panel rounded-3xl p-6 sm:p-7 shadow-xl space-y-6 border border-black/[0.08] dark:border-white/[0.08]">
           
           <!-- Workbench Header -->
-          <div class="flex items-center justify-between border-b border-[#F0E9DF] pb-4">
+          <div class="flex items-center justify-between border-b border-black/[0.08] dark:border-white/[0.08] pb-4">
             <div class="flex items-center space-x-2.5">
-              <div class="w-8 h-8 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center font-bold">
+              <div class="w-8 h-8 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold">
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </div>
               <div>
-                <h2 class="text-base font-extrabold text-stone-900" data-i18n="workbench_title">Investigate Threat Evidence</h2>
-                <p class="text-xs text-stone-500 font-medium" data-i18n="workbench_sub">Pillar 1 (Darr), Pillar 2 (Lalach) & Pillar 3 (APK)</p>
+                <h2 class="text-base font-extrabold text-slate-900 dark:text-white" data-i18n="workbench_title">Investigate Threat Evidence</h2>
+                <p class="text-xs text-slate-500 dark:text-slate-400 font-medium" data-i18n="workbench_sub">Pillar 1 (Darr), Pillar 2 (Lalach) & Pillar 3 (APK)</p>
               </div>
             </div>
-            <span class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#F5EFEB] text-stone-700 border border-[#E3D9CB]">Multi-Modal</span>
+            <span class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-black/5 dark:bg-white/[0.06] text-slate-700 dark:text-slate-300 border border-black/[0.08] dark:border-white/[0.08]">Multi-Modal</span>
           </div>
 
-          <!-- Segmented Tab Toggle -->
-          <div class="p-1 bg-[#F5EFEB] rounded-2xl border border-[#E5DDD0] flex space-x-1">
-            <button id="tabTextBtn" class="flex-1 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold bg-white text-stone-900 border border-[#E0D7C9] shadow-sm transition flex items-center justify-center space-x-2">
-              <svg class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <!-- Segmented Tab Toggle (3 Tabs: Text, File, WhatsApp Simulator) -->
+          <div class="p-1 bg-black/5 dark:bg-white/[0.06] rounded-2xl border border-black/[0.08] dark:border-white/[0.08] flex space-x-1">
+            <button id="tabTextBtn" class="flex-1 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-bold bg-white dark:bg-[#161A26] text-slate-900 dark:text-white border border-black/[0.08] dark:border-white/[0.12] shadow-sm transition flex items-center justify-center space-x-1.5">
+              <svg class="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
-              <span data-i18n="tab_text">Paste Text / WhatsApp</span>
+              <span data-i18n="tab_text">Text / Notice</span>
             </button>
-            <button id="tabFileBtn" class="flex-1 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold text-stone-600 hover:text-stone-900 transition flex items-center justify-center space-x-2">
-              <svg class="w-4 h-4 text-stone-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <button id="tabFileBtn" class="flex-1 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition flex items-center justify-center space-x-1.5">
+              <svg class="w-4 h-4 text-purple-600 dark:text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
               </svg>
-              <span data-i18n="tab_file">Upload Notice / APK</span>
+              <span data-i18n="tab_file">Upload / APK</span>
+            </button>
+            <button id="tabSimBtn" class="flex-1 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition flex items-center justify-center space-x-1.5">
+              <svg class="w-4 h-4 text-emerald-600 dark:text-emerald-400" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.668-.699c.969.585 1.761.882 2.792.882 3.183 0 5.77-2.587 5.77-5.766.001-3.181-2.586-5.768-5.77-5.768zm0 10.364c-.879 0-1.636-.264-2.348-.716l-.168-.107-1.572.412.42-1.534-.117-.187c-.482-.768-.781-1.545-.78-2.466.001-2.502 2.035-4.536 4.538-4.536 2.504 0 4.538 2.034 4.538 4.537 0 2.503-2.034 4.537-4.538 4.537zm-9.031-4.536c0 5.485 3.978 9.981 9.031 9.981 1.631 0 3.162-.435 4.521-1.2l6.448 1.688-1.722-6.289c.89-1.393 1.397-3.037 1.397-4.78 0-5.485-3.978-9.981-9.031-9.981-5.053 0-9.031 4.496-9.031 9.981z"/>
+              </svg>
+              <span data-i18n="tab_sim">WhatsApp Sim</span>
             </button>
           </div>
 
           <!-- MODE 1: TEXT INPUT -->
           <div id="textInputContainer" class="space-y-3">
-            <div class="flex items-center justify-between text-xs text-stone-500">
-              <label class="font-bold uppercase tracking-wider text-stone-700" data-i18n="input_label">
+            <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+              <label class="font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300" data-i18n="input_label">
                 Enter Message or Notice Text:
               </label>
               <div class="flex items-center space-x-3">
-                <span id="charCountSpan" class="font-mono text-[11px] text-stone-400">0 characters</span>
-                <button id="clearTextBtn" class="text-stone-500 hover:text-rose-600 font-bold transition flex items-center space-x-1">
+                <span id="charCountSpan" class="font-mono text-[11px] text-slate-400">0 characters</span>
+                <button id="clearTextBtn" class="text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 font-bold transition flex items-center space-x-1">
                   <span>✕</span>
                   <span data-i18n="clear_btn">Clear</span>
                 </button>
               </div>
             </div>
             
-            <textarea id="textInput" rows="7" placeholder="Paste WhatsApp forward, SMS, threatening call transcript, or fake court notice text here..." class="w-full bg-[#FDFBF7] border border-[#E5DDD0] rounded-2xl p-4 text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 text-sm leading-relaxed transition shadow-inner font-sans"></textarea>
+            <textarea id="textInput" rows="7" placeholder="Paste WhatsApp forward, SMS, threatening call transcript, or fake court notice text here..." class="w-full bg-[#FDFBF7] dark:bg-[#0D1017] border border-black/[0.08] dark:border-white/[0.08] rounded-2xl p-4 text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 text-sm leading-relaxed transition shadow-inner font-sans"></textarea>
           </div>
 
           <!-- MODE 2: FILE UPLOAD -->
           <div id="fileInputContainer" class="space-y-3 hidden">
-            <label class="block text-xs font-bold uppercase tracking-wider text-stone-700" data-i18n="upload_label">
-              Upload Suspicious File (.APK, Screenshot, Notice PDF):
-            </label>
+            <div class="flex items-center justify-between">
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300" data-i18n="upload_label">
+                Upload Suspicious File (.APK, Screenshot, Notice PDF):
+              </label>
+              <span class="text-[10px] font-mono text-slate-400">Max 30MB</span>
+            </div>
+
+            <!-- Inline Format / Size Error Alert -->
+            <div id="dropZoneError" class="hidden p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-700 dark:text-rose-300 text-xs font-medium flex items-center space-x-2">
+              <span class="text-rose-600 font-bold text-sm">⚠️</span>
+              <span id="dropZoneErrorMsg">Unsupported file format. Please upload .apk, .png, .jpg, .jpeg, or .pdf.</span>
+            </div>
             
-            <div id="dropZone" class="border-2 border-dashed border-[#DDD3C4] hover:border-blue-500 rounded-2xl p-8 text-center transition cursor-pointer bg-[#FDFBF7] group">
+            <div id="dropZone" class="border-2 border-dashed border-black/[0.12] dark:border-white/[0.12] hover:border-blue-500 dark:hover:border-blue-400 rounded-2xl p-8 text-center transition cursor-pointer bg-slate-50/50 dark:bg-[#0D1017] group">
               <input type="file" id="fileInput" class="hidden" accept=".apk,.png,.jpg,.jpeg,.pdf">
               <div class="flex flex-col items-center space-y-3">
-                <div class="w-14 h-14 rounded-2xl bg-[#F5EFEB] group-hover:bg-blue-50 flex items-center justify-center text-stone-600 group-hover:text-blue-600 transition ring-1 ring-[#E2D8C9] group-hover:ring-blue-300">
+                <div class="w-14 h-14 rounded-2xl bg-black/5 dark:bg-white/[0.06] group-hover:bg-blue-500/10 flex items-center justify-center text-slate-600 dark:text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition ring-1 ring-black/[0.08] dark:ring-white/[0.08]">
                   <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                   </svg>
                 </div>
                 <div>
-                  <p class="text-sm font-bold text-stone-800" data-i18n="upload_drop_title">
+                  <p class="text-sm font-bold text-slate-800 dark:text-slate-200" data-i18n="upload_drop_title">
                     Click to select file or drag & drop here
                   </p>
-                  <p class="text-xs text-stone-500 mt-1" data-i18n="upload_drop_sub">
-                    Supports <strong>.apk</strong> (Trojan scan), <strong>.png, .jpg</strong> (Screenshots/Warrants), and <strong>.pdf</strong>
+                  <p class="text-xs text-slate-500 dark:text-slate-400 mt-1" data-i18n="upload_drop_sub">
+                    Supports <strong>.apk</strong> (Trojan scan), <strong>.png, .jpg</strong> (Screenshots/Warrants), and <strong>.pdf</strong> (Up to 30MB)
                   </p>
                 </div>
+
+                <!-- One-click Load Sample Wedding_Card.apk Button -->
+                <button id="loadSampleApkBtn" type="button" class="mt-2 px-3.5 py-1.5 rounded-xl bg-purple-500/10 dark:bg-purple-950/40 border border-purple-500/30 text-purple-700 dark:text-purple-300 text-xs font-bold hover:bg-purple-500/20 transition inline-flex items-center space-x-1.5 shadow-sm">
+                  <span>📦</span>
+                  <span>Load Sample Wedding_Card.apk</span>
+                </button>
               </div>
             </div>
 
-            <div id="fileSelectedDisplay" class="hidden bg-[#F5EFEB] border border-[#E3D9CB] rounded-xl p-3.5 flex items-center justify-between text-xs text-stone-800">
-              <div class="flex items-center space-x-2 truncate">
-                <span class="text-blue-600 text-base">📄</span>
-                <span id="fileNameSpan" class="font-bold truncate max-w-xs">filename.apk</span>
+            <!-- Dynamic File Selected Display -->
+            <div id="fileSelectedDisplay" class="hidden bg-black/5 dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.08] rounded-xl p-3.5 flex items-center justify-between text-xs text-slate-800 dark:text-slate-200">
+              <div class="flex items-center space-x-2.5 truncate">
+                <span id="fileTypeIcon" class="text-lg">📄</span>
+                <div>
+                  <span id="fileNameSpan" class="font-bold truncate max-w-xs block">filename.apk</span>
+                  <span id="fileSizeSpan" class="text-[10px] text-slate-500 dark:text-slate-400 font-mono">0 KB</span>
+                </div>
               </div>
-              <button id="clearFileBtn" class="text-rose-600 hover:text-rose-700 font-bold ml-2 px-2.5 py-1 rounded-lg bg-rose-50 border border-rose-200">Remove</button>
+              <button id="clearFileBtn" class="text-rose-600 dark:text-rose-400 hover:underline font-bold ml-2 px-2.5 py-1 rounded-lg bg-rose-500/10 border border-rose-500/20">Remove</button>
             </div>
+
+            <!-- Visual Multi-Stage Scanning Progress Bar -->
+            <div id="scanProgressContainer" class="hidden space-y-2 p-3.5 rounded-2xl bg-black/5 dark:bg-white/[0.04] border border-black/[0.08] dark:border-white/[0.08]">
+              <div class="flex items-center justify-between text-xs font-mono">
+                <span id="scanProgressText" class="text-slate-700 dark:text-slate-300 font-bold">Verifying signature & manifest...</span>
+                <span id="scanProgressPercent" class="text-blue-600 dark:text-blue-400 font-bold">35%</span>
+              </div>
+              <div class="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+                <div id="scanProgressBar" class="bg-gradient-to-r from-blue-600 to-indigo-600 h-2 rounded-full transition-all duration-300" style="width: 35%"></div>
+              </div>
+              <div class="flex items-center justify-between text-[10px] text-slate-500 font-mono">
+                <span id="scanProgressStep">Stage 1 of 3: Bytecode extraction</span>
+                <span>Sub-second analyzer</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- MODE 3: WHATSAPP SMARTPHONE SIMULATOR -->
+          <div id="whatsappSimContainer" class="space-y-4 hidden">
+            
+            <!-- Smartphone Shell Container -->
+            <div class="phone-frame border border-black/[0.1] dark:border-white/[0.1] shadow-2xl">
+              
+              <!-- WhatsApp Smartphone Header -->
+              <div class="bg-[#075E54] dark:bg-[#008069] text-white px-4 py-3 flex items-center justify-between shadow-md">
+                <div class="flex items-center space-x-3">
+                  <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center font-bold text-lg relative ring-2 ring-white/30">
+                    <span>🛡️</span>
+                    <span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 rounded-full border-2 border-[#075E54]"></span>
+                  </div>
+                  <div>
+                    <div class="flex items-center space-x-1.5">
+                      <h4 class="font-bold text-sm leading-tight">Kavach AI Shield</h4>
+                      <span class="text-white text-xs" title="Official Verified Scanner">✓</span>
+                    </div>
+                    <p class="text-[10px] text-emerald-100 flex items-center space-x-1">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-ping"></span>
+                      <span>Online • National Scanner (1930)</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-2 text-white/80 text-sm">
+                  <a href="tel:1930" class="px-2 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-bold transition flex items-center space-x-1" title="Call National Cyber Helpline 1930">
+                    <span>📞</span>
+                    <span>1930</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Quick Attack Preset Chips -->
+              <div class="p-2.5 bg-black/[0.04] dark:bg-white/[0.04] border-b border-black/[0.06] dark:border-white/[0.06] overflow-x-auto flex items-center space-x-2 no-scrollbar">
+                <span class="text-[10px] uppercase font-bold text-slate-500 shrink-0 font-mono">Attack Presets:</span>
+                <button id="simChipCbi" type="button" class="px-2.5 py-1 rounded-full bg-rose-500/15 border border-rose-500/30 text-rose-700 dark:text-rose-300 text-[11px] font-bold shrink-0 hover:bg-rose-500/25 transition">
+                  🚨 CBI Digital Arrest
+                </button>
+                <button id="simChipRecharge" type="button" class="px-2.5 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-700 dark:text-amber-300 text-[11px] font-bold shrink-0 hover:bg-amber-500/25 transition">
+                  🎁 84-Day Free 5G
+                </button>
+                <button id="simChipApk" type="button" class="px-2.5 py-1 rounded-full bg-purple-500/15 border border-purple-500/30 text-purple-700 dark:text-purple-300 text-[11px] font-bold shrink-0 hover:bg-purple-500/25 transition">
+                  👰 Wedding_Card.apk
+                </button>
+                <button id="simChipSafe" type="button" class="px-2.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-[11px] font-bold shrink-0 hover:bg-emerald-500/25 transition">
+                  ✅ Safe Bill Receipt
+                </button>
+              </div>
+
+              <!-- Chat Message History Window -->
+              <div id="simChatHistory" class="whatsapp-chat-bg p-4 space-y-3.5 min-h-[300px] max-h-[380px] overflow-y-auto">
+                
+                <!-- Encryption Notice -->
+                <div class="text-center my-2">
+                  <span class="inline-block px-3 py-1 rounded-lg bg-[#FFEECD] dark:bg-[#1E293B] text-[#54656F] dark:text-[#94A3B8] text-[10px] font-medium shadow-sm">
+                    🔒 Messages sent to Kavach AI are verified in real-time under BNSS/CrPC with zero citizen data retention.
+                  </span>
+                </div>
+
+                <!-- Initial Bot Message -->
+                <div class="flex items-start">
+                  <div class="chat-bubble-in max-w-[85%] p-3 text-xs leading-relaxed space-y-1">
+                    <p class="font-bold text-emerald-700 dark:text-emerald-400 flex items-center space-x-1">
+                      <span>🛡️</span>
+                      <span>Kavach AI Citizen Security Shield</span>
+                    </p>
+                    <p class="text-slate-800 dark:text-slate-200">
+                      Namaste! Forward any suspicious message, call transcript, or APK file here to run instant statutory legal & Trojan audits.
+                    </p>
+                    <span class="text-[9px] text-slate-400 text-right block">Automated Bot</span>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Typing Indicator -->
+              <div id="simTypingIndicator" class="hidden px-4 py-2 bg-black/[0.02] dark:bg-white/[0.02] border-t border-black/[0.06] dark:border-white/[0.06] flex items-center space-x-2 text-xs text-slate-500">
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+                <span class="text-[11px] font-medium italic">Kavach AI Bot is analyzing cyber signatures...</span>
+              </div>
+
+              <!-- Chat Input Bar -->
+              <div class="p-2.5 bg-[#F0F2F5] dark:bg-[#202C33] border-t border-black/[0.08] dark:border-white/[0.08] flex items-center space-x-2">
+                <button id="simAttachApkBtn" type="button" class="p-2 rounded-full text-slate-500 hover:text-purple-600 dark:hover:text-purple-400 hover:bg-black/5 dark:hover:bg-white/10 transition" title="Simulate attaching Wedding_Card.apk">
+                  <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+                  </svg>
+                </button>
+                <input type="text" id="simInput" placeholder="Type or forward WhatsApp message..." class="flex-1 bg-white dark:bg-[#111B21] border border-black/[0.08] dark:border-white/[0.08] rounded-full px-4 py-2 text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-emerald-500 font-sans">
+                <button id="simSendBtn" type="button" class="w-9 h-9 rounded-full bg-[#008069] hover:bg-[#075E54] text-white flex items-center justify-center transition shadow-md shrink-0" title="Send message to webhook">
+                  <svg class="w-4 h-4 transform rotate-90" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"/>
+                  </svg>
+                </button>
+              </div>
+
+            </div>
+
+            <!-- Collapsible Live Webhook JSON Inspector Drawer -->
+            <details id="webhookInspectorDrawer" class="text-xs text-slate-500 group rounded-2xl border border-black/[0.08] dark:border-white/[0.08] bg-black/5 dark:bg-white/[0.04] p-3">
+              <summary class="cursor-pointer font-bold text-slate-700 dark:text-slate-300 select-none flex items-center justify-between">
+                <span class="flex items-center space-x-2">
+                  <span>🔍</span>
+                  <span>Live Webhook JSON Inspector (/api/webhook/whatsapp)</span>
+                </span>
+                <span class="text-slate-400 group-open:rotate-180 transition transform">▼</span>
+              </summary>
+              <div class="mt-3 space-y-2 pt-2 border-t border-black/[0.06] dark:border-white/[0.06]">
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] font-mono text-slate-400">Request & Response Payload Log:</span>
+                  <button id="copyJsonBtn" type="button" class="text-[10px] font-mono px-2 py-0.5 rounded bg-black/10 dark:bg-white/10 hover:bg-black/20 text-slate-700 dark:text-slate-300">Copy JSON</button>
+                </div>
+                <pre id="webhookJsonLog" class="p-3 rounded-xl bg-slate-900 text-emerald-400 font-mono text-[10px] overflow-x-auto max-h-48 leading-relaxed">// Awaiting WhatsApp simulation dispatch...</pre>
+              </div>
+            </details>
+
           </div>
 
           <!-- OPTIONAL GEMINI 1.5 FLASH API KEY DRAWER -->
-          <div class="pt-2 border-t border-[#F0E9DF]">
-            <details class="text-xs text-stone-500 group">
-              <summary class="cursor-pointer font-bold hover:text-stone-900 select-none flex items-center justify-between py-1">
+          <div class="pt-2 border-t border-black/[0.08] dark:border-white/[0.08]">
+            <details class="text-xs text-slate-500 group">
+              <summary class="cursor-pointer font-bold hover:text-slate-900 dark:hover:text-white select-none flex items-center justify-between py-1">
                 <span class="flex items-center space-x-2">
                   <span data-i18n="gemini_settings">Gemini 1.5 Flash Settings</span>
-                  <span class="text-[10px] px-2 py-0.5 rounded-full bg-[#F5EFEB] text-stone-600 border border-[#E3D9CB] font-normal" data-i18n="gemini_optional">Optional</span>
+                  <span class="text-[10px] px-2 py-0.5 rounded-full bg-black/5 dark:bg-white/[0.06] text-slate-600 dark:text-slate-400 border border-black/[0.08] dark:border-white/[0.08] font-normal" data-i18n="gemini_optional">Optional</span>
                 </span>
-                <span class="text-stone-400 group-open:rotate-180 transition transform">▼</span>
+                <span class="text-slate-400 group-open:rotate-180 transition transform">▼</span>
               </summary>
-              <div class="mt-3 space-y-2 p-3.5 rounded-2xl bg-[#FDFBF7] border border-[#E5DDD0]">
-                <input type="password" id="customApiKey" placeholder="Enter custom GEMINI_API_KEY (leave empty to use local engine)" class="w-full bg-white border border-[#E5DDD0] rounded-xl px-3.5 py-2.5 text-xs text-stone-800 focus:outline-none focus:ring-1 focus:ring-blue-500 font-mono">
-                <p class="text-[11px] text-stone-500 leading-relaxed" data-i18n="gemini_sub">
+              <div class="mt-3 space-y-2 p-3.5 rounded-2xl bg-slate-50/50 dark:bg-[#0D1017] border border-black/[0.08] dark:border-white/[0.08]">
+                <input type="password" id="customApiKey" placeholder="Enter custom GEMINI_API_KEY (leave empty to use local engine)" class="w-full bg-white dark:bg-[#161A26] border border-black/[0.08] dark:border-white/[0.08] rounded-xl px-3.5 py-2.5 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-1 focus:ring-blue-500 font-mono">
+                <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed" data-i18n="gemini_sub">
                   🛡️ <strong>Zero-Lag Offline Assurance:</strong> Even without an API key, Kavach AI's local heuristic engine performs 100% full statutory and APK forensic scans with sub-second response times.
                 </p>
               </div>
@@ -303,7 +517,7 @@
           </div>
 
           <!-- RUN SCAN ACTION BUTTON -->
-          <button id="analyzeBtn" onclick="runScan()" class="w-full py-4 px-6 rounded-2xl font-extrabold text-white text-base bg-stone-900 hover:bg-stone-800 shadow-xl shadow-stone-900/10 active:scale-[0.99] transition flex items-center justify-center space-x-2.5 group">
+          <button id="analyzeBtn" onclick="runScan()" class="w-full py-4 px-6 rounded-2xl font-extrabold text-white text-base bg-slate-900 dark:bg-blue-600 hover:bg-slate-800 dark:hover:bg-blue-500 shadow-xl shadow-black/10 active:scale-[0.99] transition flex items-center justify-center space-x-2.5 group">
             <svg id="scanSpinner" class="hidden animate-spin -ml-1 mr-2 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
               <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -317,28 +531,28 @@
         </div>
 
         <!-- STATUTORY GOLDEN RULES CARD -->
-        <div class="cream-panel rounded-3xl p-6 space-y-4 border border-[#E8DFD1] bg-white">
+        <div class="cream-panel rounded-3xl p-6 space-y-4 border border-black/[0.08] dark:border-white/[0.08]">
           <div class="flex items-center space-x-2.5">
-            <span class="p-1.5 rounded-lg bg-amber-50 text-amber-800 font-bold">
+            <span class="p-1.5 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 font-bold">
               <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
               </svg>
             </span>
-            <h3 class="text-sm font-extrabold text-stone-900" data-i18n="legal_card_title">
+            <h3 class="text-sm font-extrabold text-slate-900 dark:text-white" data-i18n="legal_card_title">
               Indian Citizen Statutory Shields (BNSS & CrPC)
             </h3>
           </div>
-          <ul class="text-xs text-stone-700 space-y-3 leading-relaxed">
+          <ul class="text-xs text-slate-700 dark:text-slate-300 space-y-3 leading-relaxed">
             <li class="flex items-start space-x-2.5">
-              <span class="text-rose-600 font-black text-sm">✕</span>
+              <span class="text-rose-600 dark:text-rose-400 font-black text-sm">✕</span>
               <span data-i18n="legal_rule_1"><strong>No Video Call Arrests:</strong> Indian police/CBI never arrest or interrogate citizens over Skype, Zoom, or WhatsApp.</span>
             </li>
             <li class="flex items-start space-x-2.5">
-              <span class="text-rose-600 font-black text-sm">✕</span>
+              <span class="text-rose-600 dark:text-rose-400 font-black text-sm">✕</span>
               <span data-i18n="legal_rule_2"><strong>No RBI Clearance Transfers:</strong> No official agency asks for deposits to secret verification bank accounts.</span>
             </li>
             <li class="flex items-start space-x-2.5">
-              <span class="text-emerald-700 font-black text-sm">✓</span>
+              <span class="text-emerald-600 dark:text-emerald-400 font-black text-sm">✓</span>
               <span data-i18n="legal_rule_3"><strong>Report Fraud Instantly:</strong> Dial <strong>1930</strong> or register complaint at <strong>cybercrime.gov.in</strong>.</span>
             </li>
           </ul>
@@ -350,20 +564,20 @@
       <div class="lg:col-span-6 space-y-6">
 
         <!-- INITIAL PLACEHOLDER (When no analysis yet) -->
-        <div id="resultPlaceholder" class="cream-panel rounded-3xl p-10 sm:p-14 text-center space-y-5 border border-[#E8DFD1] bg-white">
-          <div class="w-20 h-20 rounded-3xl bg-[#F8F2E8] mx-auto flex items-center justify-center text-amber-800 ring-1 ring-[#E2D8C9] relative">
-            <svg class="w-10 h-10 text-stone-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div id="resultPlaceholder" class="cream-panel rounded-3xl p-10 sm:p-14 text-center space-y-5 border border-black/[0.08] dark:border-white/[0.08]">
+          <div class="w-20 h-20 rounded-3xl bg-amber-500/10 mx-auto flex items-center justify-center text-amber-600 dark:text-amber-400 ring-1 ring-amber-500/20 relative">
+            <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
             </svg>
             <span class="absolute inset-0 rounded-3xl border border-amber-500/20 animate-pulse pointer-events-none"></span>
           </div>
           <div class="space-y-2">
-            <h3 class="text-lg font-black text-stone-900" data-i18n="placeholder_title">Awaiting Threat Evidence</h3>
-            <p class="text-xs text-stone-600 max-w-sm mx-auto leading-relaxed" data-i18n="placeholder_desc">
-              Paste suspicious message text on the left or click any quick sample above to observe visual threat scoring, statutory legal checks, and bilingual audio warnings.
+            <h3 class="text-lg font-black text-slate-900 dark:text-white" data-i18n="placeholder_title">Awaiting Threat Evidence</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400 max-w-sm mx-auto leading-relaxed" data-i18n="placeholder_desc">
+              Paste suspicious message text on the left, upload a file, or test via WhatsApp Simulator to observe visual threat scoring, statutory legal checks, and bilingual audio warnings.
             </p>
           </div>
-          <div class="inline-flex items-center space-x-2 text-[11px] text-stone-700 font-bold bg-[#F4EDE2] px-3.5 py-1.5 rounded-full border border-[#DDD3C2]">
+          <div class="inline-flex items-center space-x-2 text-[11px] text-slate-700 dark:text-slate-300 font-bold bg-black/5 dark:bg-white/[0.06] px-3.5 py-1.5 rounded-full border border-black/[0.08] dark:border-white/[0.08]">
             <span data-i18n="placeholder_badge">⚡ Ready for Instant Statutory Audit</span>
           </div>
         </div>
@@ -374,119 +588,135 @@
           <!-- THREAT METER & VERDICT CARD -->
           <div id="verdictBanner" class="cream-panel rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden transition-all duration-500">
 
-            <!-- Audio Advisory Controls & WhatsApp SOS Header Toolbar -->
-            <div class="flex flex-wrap items-center justify-between gap-3 border-b border-black/10 pb-5 mb-5">
+            <!-- Executive Audio Advisory Controls Toolbar -->
+            <div class="border-b border-black/[0.08] dark:border-white/[0.08] pb-5 mb-5 space-y-3">
               
-              <!-- Audio Player Controls with Animated Waveform -->
-              <div class="flex items-center space-x-2">
-                <button id="playAudioBtn" class="px-3.5 py-2 rounded-xl bg-white hover:bg-stone-50 text-stone-900 text-xs font-bold flex items-center space-x-2 transition shadow-sm border border-[#E0D7C9]">
-                  <span id="audioIcon">🔊</span>
-                  <span id="audioBtnText" data-i18n="audio_btn">Play Calming Voice Advisory</span>
-                </button>
-                
-                <!-- Equalizer waveform indicator (animates when audio plays) -->
-                <div id="audioWaveform" class="hidden flex items-center space-x-1 px-2">
-                  <span class="equalizer-bar"></span>
-                  <span class="equalizer-bar"></span>
-                  <span class="equalizer-bar"></span>
-                  <span class="equalizer-bar"></span>
-                  <span class="equalizer-bar"></span>
+              <div class="flex flex-wrap items-center justify-between gap-3">
+                <!-- Play/Pause & Equalizer Waveform -->
+                <div class="flex items-center space-x-2">
+                  <button id="playAudioBtn" class="px-3.5 py-2 rounded-xl bg-white dark:bg-[#161A26] hover:bg-slate-50 dark:hover:bg-[#1C2130] text-slate-900 dark:text-white text-xs font-bold flex items-center space-x-2 transition shadow-sm border border-black/[0.08] dark:border-white/[0.12]">
+                    <span id="audioIcon">🔊</span>
+                    <span id="audioBtnText" data-i18n="audio_btn">Play Calming Voice Advisory</span>
+                  </button>
+                  
+                  <!-- Equalizer waveform indicator -->
+                  <div id="audioWaveform" class="hidden flex items-center space-x-1 px-2">
+                    <span class="equalizer-bar"></span>
+                    <span class="equalizer-bar"></span>
+                    <span class="equalizer-bar"></span>
+                    <span class="equalizer-bar"></span>
+                    <span class="equalizer-bar"></span>
+                  </div>
+
+                  <button id="stopAudioBtn" class="hidden px-2.5 py-2 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 text-xs font-bold hover:bg-rose-500/20 border border-rose-500/20">
+                    <span data-i18n="audio_stop">⏹ Stop</span>
+                  </button>
                 </div>
 
-                <button id="stopAudioBtn" class="hidden px-2.5 py-2 rounded-xl bg-rose-50 text-rose-700 text-xs font-bold hover:bg-rose-100 border border-rose-200">
-                  <span data-i18n="audio_stop">⏹ Stop</span>
+                <!-- Action Buttons: Copy, WhatsApp SOS, Reset -->
+                <div class="flex items-center space-x-2">
+                  <!-- Copy Report Button with Micro-State -->
+                  <button id="copyReportBtn" class="px-3 py-2 rounded-xl bg-white dark:bg-[#161A26] hover:bg-slate-50 dark:hover:bg-[#1C2130] text-slate-800 dark:text-slate-200 text-xs font-bold flex items-center space-x-1.5 border border-black/[0.08] dark:border-white/[0.12] transition shadow-sm" title="Copy full report to clipboard">
+                    <span id="copyReportIcon">📋</span>
+                    <span id="copyReportText" data-i18n="btn_copy_report">Copy Report</span>
+                  </button>
+
+                  <!-- WhatsApp SOS Share Button -->
+                  <a id="whatsappSosBtn" href="#" target="_blank" class="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center space-x-1.5 shadow-md shadow-emerald-900/20 transition">
+                    <span>📲</span>
+                    <span data-i18n="btn_whatsapp_sos">WhatsApp SOS</span>
+                  </a>
+
+                  <!-- Reset Scan Button -->
+                  <button id="resetScanBtn" class="px-2.5 py-2 rounded-xl bg-white dark:bg-[#161A26] hover:bg-slate-50 dark:hover:bg-[#1C2130] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white text-xs font-bold border border-black/[0.08] dark:border-white/[0.12] transition shadow-sm" title="Clear and reset scanner">
+                    <span>🔄</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Interactive Timeline Range Scrubber & Digital Timers -->
+              <div id="audioScrubberRow" class="hidden flex items-center space-x-3 pt-2 text-xs">
+                <span id="audioCurrentTime" class="font-mono text-slate-600 dark:text-slate-300 font-bold min-w-[36px]">00:00</span>
+                <input type="range" id="audioScrubber" min="0" max="100" value="0" class="audio-scrubber flex-1" title="Scrub audio advisory timeline">
+                <span id="audioTotalTime" class="font-mono text-slate-500 dark:text-slate-400 font-bold min-w-[36px]">00:28</span>
+                <button id="transcriptToggleBtn" type="button" class="text-[11px] font-semibold text-blue-600 dark:text-blue-400 hover:underline shrink-0">
+                  Transcript
                 </button>
               </div>
 
-              <!-- Action Buttons -->
-              <div class="flex items-center space-x-2">
-                
-                <!-- Copy Report Button -->
-                <button id="copyReportBtn" class="px-3 py-2 rounded-xl bg-white hover:bg-stone-50 text-stone-800 text-xs font-bold flex items-center space-x-1.5 border border-[#E0D7C9] transition shadow-sm" title="Copy full report to clipboard">
-                  <span>📋</span>
-                  <span data-i18n="btn_copy_report">Copy Report</span>
-                </button>
-
-                <!-- One-Tap WhatsApp SOS Button -->
-                <a id="whatsappSosBtn" href="#" target="_blank" class="px-3.5 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold flex items-center space-x-1.5 shadow-md shadow-emerald-900/10 transition">
-                  <span>📲</span>
-                  <span data-i18n="btn_whatsapp_sos">WhatsApp SOS</span>
-                </a>
-
-                <!-- Reset Scan Button -->
-                <button id="resetScanBtn" class="px-2.5 py-2 rounded-xl bg-white hover:bg-stone-50 text-stone-600 hover:text-stone-900 text-xs font-bold border border-[#E0D7C9] transition shadow-sm" title="Clear and reset scanner">
-                  <span>🔄</span>
-                </button>
-
+              <!-- Expandable Transcript Card -->
+              <div id="transcriptCard" class="hidden p-3 rounded-xl bg-black/[0.03] dark:bg-white/[0.04] border border-black/[0.06] dark:border-white/[0.06] text-xs text-slate-700 dark:text-slate-300 leading-relaxed font-sans">
+                <p id="transcriptText"></p>
               </div>
+
             </div>
 
             <!-- Threat Verdict Header & Circular SVG Gauge -->
             <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
               <div class="space-y-1">
-                <span id="threatLevelBadge" class="text-[11px] font-black px-3.5 py-1.5 rounded-full uppercase tracking-widest inline-flex items-center space-x-1.5 border bg-rose-50 text-rose-800 border-rose-200">
+                <span id="threatLevelBadge" class="text-[11px] font-black px-3.5 py-1.5 rounded-full uppercase tracking-widest inline-flex items-center space-x-1.5 border bg-rose-500/10 text-rose-700 dark:text-rose-300 border-rose-500/30">
                   <span>CRITICAL VERDICT</span>
                 </span>
-                <h3 id="verdictTitle" class="text-2xl font-black text-stone-900 tracking-tight leading-snug">
+                <h3 id="verdictTitle" class="text-2xl font-black text-slate-900 dark:text-white tracking-tight leading-snug">
                   Digital Arrest & Fake Police Extortion
                 </h3>
-                <p id="engineBadge" class="text-xs text-stone-500 font-mono">
+                <p id="engineBadge" class="text-xs text-slate-500 dark:text-slate-400 font-mono">
                   Engine: Kavach Statutory Checker
                 </p>
               </div>
 
-              <!-- Circular Progress Gauge in White Card -->
-              <div class="flex flex-col items-center justify-center p-3.5 rounded-2xl bg-white border border-[#E5DDD0] min-w-[120px] shadow-sm relative">
+              <!-- Circular Progress Gauge in Executive Card -->
+              <div class="flex flex-col items-center justify-center p-3.5 rounded-2xl bg-white dark:bg-[#161A26] border border-black/[0.08] dark:border-white/[0.12] min-w-[120px] shadow-sm relative">
                 <svg class="w-20 h-20" viewBox="0 0 100 100">
                   <!-- Background Track Ring -->
-                  <circle cx="50" cy="50" r="45" stroke="#F0E9DF" stroke-width="8" fill="transparent"/>
+                  <circle cx="50" cy="50" r="45" stroke="currentColor" class="text-slate-200 dark:text-slate-800" stroke-width="8" fill="transparent"/>
                   <!-- Animated Progress Ring -->
                   <circle id="gaugeCircle" class="gauge-circle" cx="50" cy="50" r="45" stroke="#E11D48" stroke-width="8" stroke-linecap="round" fill="transparent" stroke-dasharray="282.7" stroke-dashoffset="28.2"/>
                 </svg>
                 <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                  <span class="text-2xl font-black text-stone-900" id="threatScoreDisplay">95</span>
-                  <span class="text-[9px] uppercase font-bold text-stone-500 tracking-wider">Score</span>
+                  <span class="text-2xl font-black text-slate-900 dark:text-white" id="threatScoreDisplay">95</span>
+                  <span class="text-[9px] uppercase font-bold text-slate-500 dark:text-slate-400 tracking-wider">Score</span>
                 </div>
               </div>
             </div>
 
             <!-- Bilingual Summary -->
-            <div class="mt-5 pt-5 border-t border-black/10 space-y-2.5">
-              <p id="summaryEn" class="text-xs sm:text-sm text-stone-800 leading-relaxed font-medium"></p>
-              <p id="summaryHi" class="text-xs sm:text-sm text-amber-950 leading-relaxed font-devanagari font-medium"></p>
+            <div class="mt-5 pt-5 border-t border-black/[0.08] dark:border-white/[0.08] space-y-2.5">
+              <p id="summaryEn" class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed font-medium"></p>
+              <p id="summaryHi" class="text-xs sm:text-sm text-amber-900 dark:text-amber-300 leading-relaxed font-devanagari font-medium"></p>
             </div>
           </div>
 
           <!-- IMMEDIATE ACTIONS CHECKLIST (Step-by-step guidance for parents) -->
-          <div class="cream-panel rounded-3xl p-6 space-y-3.5 border border-[#E8DFD1] bg-white">
-            <h4 class="text-sm font-extrabold text-stone-900 flex items-center space-x-2">
-              <span class="p-1 rounded bg-rose-50 text-rose-700">🚨</span>
+          <div class="cream-panel rounded-3xl p-6 space-y-3.5 border border-black/[0.08] dark:border-white/[0.08]">
+            <h4 class="text-sm font-extrabold text-slate-900 dark:text-white flex items-center space-x-2">
+              <span class="p-1 rounded bg-rose-500/10 text-rose-600 dark:text-rose-400">🚨</span>
               <span data-i18n="title_immediate_actions">Immediate Recommended Steps / तुरंत क्या करें:</span>
             </h4>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs">
-              <div class="space-y-2 p-4 rounded-2xl bg-[#FDFBF7] border border-[#E9E2D8]">
-                <span class="font-extrabold text-blue-800 uppercase tracking-wider text-[11px]">English Instructions:</span>
-                <ul id="actionsEnList" class="space-y-1.5 text-stone-700"></ul>
+              <div class="space-y-2 p-4 rounded-2xl bg-black/5 dark:bg-white/[0.03] border border-black/[0.06] dark:border-white/[0.06]">
+                <span class="font-extrabold text-blue-700 dark:text-blue-400 uppercase tracking-wider text-[11px]">English Instructions:</span>
+                <ul id="actionsEnList" class="space-y-1.5 text-slate-700 dark:text-slate-300"></ul>
               </div>
-              <div class="space-y-2 p-4 rounded-2xl bg-[#FDFBF7] border border-[#E9E2D8] font-devanagari">
-                <span class="font-extrabold text-amber-800 uppercase tracking-wider text-[11px]">हिन्दी निर्देश:</span>
-                <ul id="actionsHiList" class="space-y-1.5 text-stone-700"></ul>
+              <div class="space-y-2 p-4 rounded-2xl bg-black/5 dark:bg-white/[0.03] border border-black/[0.06] dark:border-white/[0.06] font-devanagari">
+                <span class="font-extrabold text-amber-700 dark:text-amber-400 uppercase tracking-wider text-[11px]">हिन्दी निर्देश:</span>
+                <ul id="actionsHiList" class="space-y-1.5 text-slate-700 dark:text-slate-300"></ul>
               </div>
             </div>
           </div>
 
           <!-- DETAILED FORENSIC EVIDENCE -->
-          <div class="cream-panel rounded-3xl p-6 space-y-3.5 border border-[#E8DFD1] bg-white">
-            <h4 class="text-sm font-extrabold text-stone-900 flex items-center space-x-2">
-              <span class="p-1 rounded bg-amber-50 text-amber-800">🔍</span>
+          <div class="cream-panel rounded-3xl p-6 space-y-3.5 border border-black/[0.08] dark:border-white/[0.08]">
+            <h4 class="text-sm font-extrabold text-slate-900 dark:text-white flex items-center space-x-2">
+              <span class="p-1 rounded bg-amber-500/10 text-amber-600 dark:text-amber-400">🔍</span>
               <span data-i18n="title_forensic_evidence">Forensic Indicators & Threat Patterns Detected:</span>
             </h4>
             <div id="evidenceList" class="space-y-2.5 text-xs"></div>
           </div>
 
           <!-- LEGAL RULES BREACHED (Pillar 1) -->
-          <div id="legalSection" class="cream-panel rounded-3xl p-6 space-y-3.5 border border-rose-200 bg-rose-50/40 hidden">
-            <h4 class="text-sm font-extrabold text-rose-900 flex items-center space-x-2">
+          <div id="legalSection" class="cream-panel rounded-3xl p-6 space-y-3.5 border border-rose-500/30 bg-rose-500/5 hidden">
+            <h4 class="text-sm font-extrabold text-rose-700 dark:text-rose-400 flex items-center space-x-2">
               <span>⚖️</span>
               <span data-i18n="title_legal_violations">Indian Statutory Law Violations (BNSS 2023 / CrPC):</span>
             </h4>
@@ -494,8 +724,8 @@
           </div>
 
           <!-- APK STATIC FINDINGS (Pillar 3) -->
-          <div id="apkSection" class="cream-panel rounded-3xl p-6 space-y-3.5 border border-purple-200 bg-purple-50/40 hidden">
-            <h4 class="text-sm font-extrabold text-purple-900 flex items-center space-x-2">
+          <div id="apkSection" class="cream-panel rounded-3xl p-6 space-y-3.5 border border-purple-500/30 bg-purple-500/5 hidden">
+            <h4 class="text-sm font-extrabold text-purple-700 dark:text-purple-400 flex items-center space-x-2">
               <span>📱</span>
               <span data-i18n="title_apk_audit">APK Static Inspection & Trojan Permission Audit:</span>
             </h4>
@@ -512,26 +742,26 @@
 
   <!-- FLOATING TOAST NOTIFICATION -->
   <div id="toastNotification" class="fixed bottom-6 right-6 z-50 hidden">
-    <div class="px-4 py-3 rounded-2xl bg-stone-900 text-white shadow-xl text-xs font-bold flex items-center space-x-2 border border-stone-700">
+    <div class="px-4 py-3 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-xl text-xs font-bold flex items-center space-x-2 border border-slate-700 dark:border-slate-300">
       <span class="text-amber-400">⚡</span>
       <span id="toastMessage">Action completed</span>
     </div>
   </div>
 
   <!-- FOOTER -->
-  <footer class="border-t border-[#EAE3D6] bg-white py-8 text-xs text-stone-500 mt-12">
+  <footer class="border-t border-black/[0.08] dark:border-white/[0.08] bg-white dark:bg-[#0E1118] py-8 text-xs text-slate-500 dark:text-slate-400 mt-12 transition-colors duration-300">
     <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div class="flex items-center space-x-2 text-stone-600">
+      <div class="flex items-center space-x-2 text-slate-600 dark:text-slate-400">
         <span class="text-amber-600 font-bold">🛡️</span>
         <p data-i18n="footer_text"><strong>Kavach AI</strong> — Open-source Cyber Shield for Indian Citizens. Built for Google Buildathon & Hackathons.</p>
       </div>
       <div class="flex flex-wrap items-center gap-4 sm:gap-6 font-medium">
-        <a href="/api/legal-rules" target="_blank" class="hover:text-blue-600 transition">Legal Statutes API</a>
-        <a href="/api/health" target="_blank" class="hover:text-blue-600 transition">System Health</a>
-        <a href="https://github.com/krishnachandra81973-ui/kavach-ai-" target="_blank" class="text-stone-600 hover:text-stone-900 transition flex items-center space-x-1">
+        <a href="/api/legal-rules" target="_blank" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Legal Statutes API</a>
+        <a href="/api/health" target="_blank" class="hover:text-blue-600 dark:hover:text-blue-400 transition">System Health</a>
+        <a href="https://github.com/krishnachandra81973-ui/kavach-ai-" target="_blank" class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition flex items-center space-x-1">
           <span>GitHub</span>
         </a>
-        <a href="https://cybercrime.gov.in" target="_blank" class="text-rose-700 hover:text-rose-800 font-bold transition">cybercrime.gov.in (Helpline: 1930)</a>
+        <a href="https://cybercrime.gov.in" target="_blank" class="text-rose-600 dark:text-rose-400 hover:underline font-bold transition">cybercrime.gov.in (Helpline: 1930)</a>
       </div>
     </div>
   </footer>

@@ -14,7 +14,7 @@ def test_filename_social_engineering_heuristics():
 
 
 def test_sample_apk_static_inspection():
-    apk_path = "/home/keshavnarayan501/.gemini/antigravity/scratch/kavach-ai/samples/Wedding_Card_Invitation.apk"
+    apk_path = os.path.join(os.path.dirname(__file__), "..", "samples", "Wedding_Card_Invitation.apk")
     assert os.path.exists(apk_path)
 
     with open(apk_path, "rb") as f:

@@ -1,6 +1,7 @@
 """
 Integration tests for Kavach AI FastAPI Endpoints
 """
+import os
 import pytest
 from starlette.testclient import TestClient
 from app.main import app
@@ -80,7 +81,8 @@ def test_analyze_text_empty_validation_error():
 
 
 def test_analyze_file_upload_apk():
-    apk_path = "/home/keshavnarayan501/.gemini/antigravity/scratch/kavach-ai/samples/Wedding_Card_Invitation.apk"
+    apk_path = os.path.join(os.path.dirname(__file__), "..", "samples", "Wedding_Card_Invitation.apk")
+    assert os.path.exists(apk_path)
     with open(apk_path, "rb") as f:
         response = client.post(
             "/api/analyze/upload",
@@ -92,6 +94,13 @@ def test_analyze_file_upload_apk():
     assert data["category"] == "MALICIOUS_APK"
     assert data["apk_analysis"] is not None
     assert len(data["apk_analysis"]["dangerous_permissions"]) > 0
+
+
+def test_download_sample_apk_endpoint():
+    response = client.get("/api/samples/Wedding_Card_Invitation.apk")
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "application/vnd.android.package-archive"
+    assert len(response.content) > 0
 
 
 def test_whatsapp_webhook_verification():
@@ -143,4 +152,76 @@ def test_whatsapp_webhook_incoming_message():
     assert data["threat_level"] in ["CRITICAL", "SUSPICIOUS"]
     assert data["category"] == "DIGITAL_ARREST"
     assert "1930" in data["whatsapp_reply_message"]
+    assert "evidence_list" in data
+    assert "legal_rule_violations" in data
+    assert "summary_en" in data
+
+
+def test_whatsapp_webhook_simulator_direct_json():
+    # Direct simulator testing format
+    payload = {
+        "message": "PM Modi 84-day free 5G recharge offer! Click http://free-5g.online to claim. Forward to 5 groups.",
+        "from": "+919876543210"
+    }
+    response = client.post("/api/webhook/whatsapp", json=payload)
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "success"
+    assert data["category"] == "GREED_SCAM"
+    assert data["threat_score"] > 0
+    assert "whatsapp_reply_message" in data
+    assert len(data["evidence_list"]) > 0
+
+
+def test_whatsapp_webhook_document_apk_attachment():
+    # Meta WhatsApp Cloud API document attachment payload
+    payload = {
+        "entry": [{
+            "changes": [{
+                "value": {
+                    "messages": [{
+                        "from": "919876543210",
+                        "type": "document",
+                        "document": {
+                            "filename": "Wedding_Card_Invitation.apk",
+                            "caption": "Namaste, our wedding card invitation"
+                        }
+                    }]
+                }
+            }]
+        }]
+    }
+    response = client.post("/api/webhook/whatsapp", json=payload)
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "success"
+    assert data["category"] == "MALICIOUS_APK"
+    assert data["threat_level"] in ["CRITICAL", "SUSPICIOUS"]
+    assert data["threat_score"] >= 50
+    assert data["apk_analysis"] is not None
+
+
+def test_whatsapp_webhook_simulator_apk_filename_payload():
+    # Direct simulator testing format with filename
+    payload = {
+        "filename": "Electricity_Bill_Update.apk",
+        "message": "Dear customer your power will be disconnected update your bill by installing apk",
+        "from": "+919988776655"
+    }
+    response = client.post("/api/webhook/whatsapp", json=payload)
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "success"
+    assert data["category"] == "MALICIOUS_APK"
+    assert data["threat_level"] in ["CRITICAL", "SUSPICIOUS"]
+    assert data["threat_score"] >= 50
+    assert data["apk_analysis"] is not None
+
+
+def test_whatsapp_webhook_empty_payload():
+    response = client.post("/api/webhook/whatsapp", json={})
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "ignored"
+
 

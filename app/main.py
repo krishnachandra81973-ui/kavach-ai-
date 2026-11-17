@@ -158,6 +158,23 @@ async def get_test_samples():
     return {"samples": samples}
 
 
+@app.get("/api/samples/Wedding_Card_Invitation.apk")
+@app.get("/samples/Wedding_Card_Invitation.apk")
+async def download_sample_apk():
+    """
+    Serves the authentic sample APK file for client-side dropzone and trojan inspection testing.
+    """
+    apk_file = os.path.join(BASE_DIR, "samples", "Wedding_Card_Invitation.apk")
+    if os.path.exists(apk_file):
+        from fastapi.responses import FileResponse
+        return FileResponse(
+            apk_file,
+            media_type="application/vnd.android.package-archive",
+            filename="Wedding_Card_Invitation.apk"
+        )
+    return JSONResponse(status_code=404, content={"error": "Sample APK not found"})
+
+
 @app.get("/api/legal-rules")
 @app.get("/legal-rules")
 async def get_legal_rules():
@@ -229,6 +246,7 @@ async def handle_whatsapp_webhook(request: Request):
 
     extracted_text = ""
     sender_phone = ""
+    extracted_filename = None
 
     # Parse standard Meta WhatsApp Cloud API payload format
     try:
@@ -246,7 +264,9 @@ async def handle_whatsapp_webhook(request: Request):
                     elif msg.get("type") == "image":
                         extracted_text = msg.get("image", {}).get("caption", "WhatsApp Image forwarded for forensic audit")
                     elif msg.get("type") == "document":
-                        extracted_text = msg.get("document", {}).get("filename", "WhatsApp Document")
+                        doc = msg.get("document", {})
+                        extracted_filename = doc.get("filename")
+                        extracted_text = doc.get("caption") or extracted_filename or "WhatsApp Document"
     except Exception:
         pass
 
@@ -254,26 +274,43 @@ async def handle_whatsapp_webhook(request: Request):
     if not extracted_text:
         extracted_text = body.get("text") or body.get("message") or body.get("Body") or ""
         sender_phone = body.get("from") or body.get("From") or sender_phone
+    if not extracted_filename:
+        extracted_filename = body.get("filename")
 
-    if not extracted_text.strip():
+    if not extracted_text.strip() and not extracted_filename:
         return JSONResponse(
             content={"status": "ignored", "reason": "No text content found in WhatsApp payload"},
             status_code=200
         )
 
-    # Run Kavach AI Forensic Engine
+    if not extracted_text.strip() and extracted_filename:
+        extracted_text = f"WhatsApp Document Attachment: {extracted_filename}"
+
+    # Run Kavach AI Forensic Engine with filename telemetry
     orchestrator = ForensicOrchestrator()
-    result = await orchestrator.analyze(text=extracted_text)
+    result = await orchestrator.analyze(text=extracted_text, filename=extracted_filename)
 
     return JSONResponse(
         content={
             "status": "success",
-            "sender": sender_phone,
+            "sender": sender_phone or "Citizen",
             "threat_level": result.threat_level.value,
             "threat_score": result.threat_score,
             "category": result.category.value,
+            "title_en": result.title_en,
+            "title_hi": result.title_hi,
+            "summary_en": result.summary_en,
+            "summary_hi": result.summary_hi,
             "whatsapp_reply_message": result.whatsapp_sos_text,
             "immediate_actions": result.immediate_actions_hi,
+            "immediate_actions_en": result.immediate_actions_en,
+            "immediate_actions_hi": result.immediate_actions_hi,
+            "evidence_list": [e.model_dump() for e in result.evidence_list],
+            "legal_rule_violations": [v.model_dump() for v in result.legal_rule_violations],
+            "apk_analysis": result.apk_analysis.model_dump() if result.apk_analysis else None,
+            "speech_script_en": result.speech_script_en,
+            "speech_script_hi": result.speech_script_hi,
+            "engine_used": result.engine_used,
             "helpline": CYBER_HELPLINE,
             "portal": "https://cybercrime.gov.in"
         },

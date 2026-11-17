@@ -1,4 +1,4 @@
-/* Kavach AI - Luxury Light Cream Theme Stylesheet */
+/* Kavach AI - Production SaaS Obsidian Dark & Alabaster Light Theme */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 :root {
@@ -6,23 +6,54 @@
   --font-devanagari: 'Noto Sans Devanagari', 'Plus Jakarta Sans', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   
-  --bg-cream: #FAF7F2;
-  --card-white: #FFFFFF;
-  --border-cream: #E9E2D8;
-  --text-primary: #1C1917;
-  --text-secondary: #44403C;
-  --text-muted: #78716C;
+  /* Alabaster Light Palette (Default) */
+  --bg-canvas: #F8F9FA;
+  --panel-bg: #FFFFFF;
+  --panel-hero-bg: linear-gradient(145deg, #FFFFFF 0%, #F8F9FA 100%);
+  --border-hairline: rgba(0, 0, 0, 0.08);
+  --border-subtle: #E2E8F0;
+  --text-primary: #0F172A;
+  --text-secondary: #334155;
+  --text-muted: #64748B;
+  --card-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.04), 0 2px 6px rgba(15, 23, 42, 0.02);
+  --hero-shadow: 0 15px 40px -10px rgba(15, 23, 42, 0.06), 0 2px 8px rgba(15, 23, 42, 0.02);
+  --input-bg: #F8FAFC;
+  --pill-bg: #F1F5F9;
+}
+
+/* Obsidian Dark Palette (Flagship Tier) */
+html.dark {
+  --bg-canvas: #090A0F;
+  --panel-bg: #11141C;
+  --panel-hero-bg: linear-gradient(145deg, #11141C 0%, #0D1017 100%);
+  --border-hairline: rgba(255, 255, 255, 0.08);
+  --border-subtle: rgba(255, 255, 255, 0.12);
+  --text-primary: #F8FAFC;
+  --text-secondary: #CBD5E1;
+  --text-muted: #94A3B8;
+  --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.3);
+  --hero-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.7), 0 2px 8px rgba(0, 0, 0, 0.4);
+  --input-bg: #0D1017;
+  --pill-bg: #1A1F2C;
 }
 
 body {
   font-family: var(--font-sans);
-  background-color: #FAF7F2;
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
   background-image: 
     radial-gradient(at 0% 0%, rgba(217, 119, 6, 0.04) 0px, transparent 40%),
-    radial-gradient(at 100% 0%, rgba(30, 58, 138, 0.04) 0px, transparent 40%),
-    radial-gradient(at 50% 100%, rgba(245, 158, 11, 0.03) 0px, transparent 50%);
+    radial-gradient(at 100% 0%, rgba(59, 130, 246, 0.05) 0px, transparent 40%),
+    radial-gradient(at 50% 100%, rgba(16, 185, 129, 0.03) 0px, transparent 50%);
   background-attachment: fixed;
-  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html.dark body {
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(217, 119, 6, 0.06) 0px, transparent 45%),
+    radial-gradient(at 100% 0%, rgba(99, 102, 241, 0.07) 0px, transparent 45%),
+    radial-gradient(at 50% 100%, rgba(16, 185, 129, 0.04) 0px, transparent 50%);
 }
 
 .font-devanagari {
@@ -39,47 +70,70 @@ body {
   height: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: #F5EFEB;
+  background: var(--bg-canvas);
 }
 ::-webkit-scrollbar-thumb {
-  background: #D7CCC2;
+  background: #CBD5E1;
   border-radius: 9999px;
-  border: 1px solid #FAF7F2;
+  border: 1px solid var(--bg-canvas);
+}
+html.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+  border: 1px solid #090A0F;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #B8A89C;
+  background: #94A3B8;
+}
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
 }
 
-/* Luxury Cream Card Panels */
+/* Executive Card Surfaces */
 .cream-panel {
-  background: #FFFFFF;
-  border: 1px solid #EBE4D8;
-  box-shadow: 0 10px 30px -5px rgba(60, 40, 20, 0.04), 0 2px 6px rgba(60, 40, 20, 0.02);
+  background-color: var(--panel-bg);
+  border: 1px solid var(--border-hairline);
+  box-shadow: var(--card-shadow);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .cream-panel-hero {
-  background: linear-gradient(145deg, #FFFFFF 0%, #FDFBF8 100%);
-  border: 1px solid #E6DDD0;
-  box-shadow: 0 15px 40px -10px rgba(70, 50, 30, 0.06), 0 2px 8px rgba(70, 50, 30, 0.02);
+  background: var(--panel-hero-bg);
+  border: 1px solid var(--border-hairline);
+  box-shadow: var(--hero-shadow);
 }
 
-/* Threat Result Color Themes for Light Cream */
+/* Threat Result Color Themes for Light & Dark */
 .threat-critical-glow {
-  background: linear-gradient(135deg, #FFF5F5 0%, #FEF2F2 100%);
+  background: linear-gradient(135deg, #FFF5F5 0%, #FEF2F2 100%) !important;
   border: 1px solid #FCA5A5 !important;
-  box-shadow: 0 12px 35px -5px rgba(239, 68, 68, 0.12);
+  box-shadow: 0 12px 35px -5px rgba(239, 68, 68, 0.15) !important;
+}
+html.dark .threat-critical-glow {
+  background: linear-gradient(135deg, #1A0D11 0%, #170A0E 100%) !important;
+  border: 1px solid rgba(244, 63, 94, 0.35) !important;
+  box-shadow: 0 12px 35px -5px rgba(225, 29, 72, 0.25) !important;
 }
 
 .threat-suspicious-glow {
-  background: linear-gradient(135deg, #FFFDF0 0%, #FFFBEB 100%);
+  background: linear-gradient(135deg, #FFFDF0 0%, #FFFBEB 100%) !important;
   border: 1px solid #FCD34D !important;
-  box-shadow: 0 12px 35px -5px rgba(245, 158, 11, 0.12);
+  box-shadow: 0 12px 35px -5px rgba(245, 158, 11, 0.15) !important;
+}
+html.dark .threat-suspicious-glow {
+  background: linear-gradient(135deg, #1B150A 0%, #161107 100%) !important;
+  border: 1px solid rgba(245, 158, 11, 0.35) !important;
+  box-shadow: 0 12px 35px -5px rgba(245, 158, 11, 0.25) !important;
 }
 
 .threat-safe-glow {
-  background: linear-gradient(135deg, #F0FDF4 0%, #ECFDF5 100%);
+  background: linear-gradient(135deg, #F0FDF4 0%, #ECFDF5 100%) !important;
   border: 1px solid #86EFAC !important;
-  box-shadow: 0 12px 35px -5px rgba(16, 185, 129, 0.12);
+  box-shadow: 0 12px 35px -5px rgba(16, 185, 129, 0.15) !important;
+}
+html.dark .threat-safe-glow {
+  background: linear-gradient(135deg, #0A1912 0%, #08140E 100%) !important;
+  border: 1px solid rgba(16, 185, 129, 0.35) !important;
+  box-shadow: 0 12px 35px -5px rgba(16, 185, 129, 0.25) !important;
 }
 
 /* Equalizer Bars Animation */
@@ -90,11 +144,18 @@ body {
   border-radius: 9999px;
   animation: equalize 1s infinite ease-in-out;
 }
+html.dark .equalizer-bar {
+  background-color: #60A5FA;
+}
 .equalizer-bar:nth-child(1) { height: 8px; animation-delay: 0.1s; }
 .equalizer-bar:nth-child(2) { height: 16px; animation-delay: 0.3s; }
 .equalizer-bar:nth-child(3) { height: 12px; animation-delay: 0.2s; }
 .equalizer-bar:nth-child(4) { height: 20px; animation-delay: 0.4s; }
 .equalizer-bar:nth-child(5) { height: 10px; animation-delay: 0.15s; }
+
+.equalizer-bar.paused {
+  animation-play-state: paused;
+}
 
 @keyframes equalize {
   0%, 100% { transform: scaleY(0.4); }
@@ -128,4 +189,102 @@ body {
 #toastNotification.show {
   transform: translateY(0);
   opacity: 1;
+}
+
+/* WhatsApp Smartphone Simulator Styles */
+.phone-frame {
+  max-width: 100%;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  background-color: #EFEAE2;
+  position: relative;
+}
+html.dark .phone-frame {
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  background-color: #0B141A;
+}
+
+.whatsapp-chat-bg {
+  background-color: #EFEAE2;
+  background-image: radial-gradient(#D1D7DB 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+html.dark .whatsapp-chat-bg {
+  background-color: #0B141A;
+  background-image: radial-gradient(#1E293B 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Chat Bubbles */
+.chat-bubble-out {
+  background-color: #D9FDD3;
+  color: #111B21;
+  border-radius: 12px 12px 2px 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+html.dark .chat-bubble-out {
+  background-color: #005C4B;
+  color: #E9EDEF;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.chat-bubble-in {
+  background-color: #FFFFFF;
+  color: #111B21;
+  border-radius: 12px 12px 12px 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+html.dark .chat-bubble-in {
+  background-color: #202C33;
+  color: #E9EDEF;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Typing Dots Animation */
+.typing-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #8696A0;
+  animation: typingBounce 1.4s infinite ease-in-out both;
+}
+.typing-dot:nth-child(1) { animation-delay: -0.32s; }
+.typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes typingBounce {
+  0%, 80%, 100% { transform: scale(0); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+/* Audio Scrubber Range Styling */
+input[type="range"].audio-scrubber {
+  -webkit-appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+input[type="range"].audio-scrubber::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 9999px;
+  background: #E2E8F0;
+}
+html.dark input[type="range"].audio-scrubber::-webkit-slider-runnable-track {
+  background: #334155;
+}
+input[type="range"].audio-scrubber::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  background: #2563EB;
+  margin-top: -4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: transform 0.1s ease;
+}
+html.dark input[type="range"].audio-scrubber::-webkit-slider-thumb {
+  background: #3B82F6;
+}
+input[type="range"].audio-scrubber::-webkit-slider-thumb:hover {
+  transform: scale(1.25);
 }
