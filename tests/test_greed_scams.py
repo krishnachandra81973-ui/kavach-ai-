@@ -48,3 +48,13 @@ def test_viral_forward_trap():
     result = GreedScamAnalyzer.analyze(text)
     assert len(result["matched_viral"]) > 0
     assert any("WhatsApp Forwarding" in ev.indicator for ev in result["evidence"])
+
+
+def test_url_userinfo_and_port_parsing():
+    """Verify URLs with embedded credentials and ports correctly extract hostname."""
+    audit = GreedScamAnalyzer.audit_url("https://user:pass@jio-recharge.online:8080/claim")
+    assert audit["domain"] == "jio-recharge.online"
+    assert audit["is_phishing"] is True
+    assert audit["mimics_telco"] is True
+    assert audit["is_official_telco"] is False
+

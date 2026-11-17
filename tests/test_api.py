@@ -225,3 +225,52 @@ def test_whatsapp_webhook_empty_payload():
     assert data["status"] == "ignored"
 
 
+def test_whatsapp_webhook_non_dict_payloads():
+    """Verify non-dict JSON payloads ([] , 123, 'string') return 200 ignored without 500 crashes."""
+    # List payload
+    res_list = client.post("/api/webhook/whatsapp", json=[])
+    assert res_list.status_code == 200
+    assert res_list.json()["status"] == "ignored"
+    assert "Payload must be a JSON object" in res_list.json()["reason"]
+
+    # Integer payload
+    res_int = client.post("/api/webhook/whatsapp", json=123)
+    assert res_int.status_code == 200
+    assert res_int.json()["status"] == "ignored"
+
+    # String payload
+    res_str = client.post("/api/webhook/whatsapp", json="hello world")
+    assert res_str.status_code == 200
+    assert res_str.json()["status"] == "ignored"
+
+    # Route alias check
+    res_alias = client.post("/webhook/whatsapp", json=[])
+    assert res_alias.status_code == 200
+    assert res_alias.json()["status"] == "ignored"
+
+
+def test_whatsapp_webhook_type_confused_payloads():
+    """Verify integer or non-string values inside message or filename fields do not crash with AttributeError."""
+    # Integer in message
+    res_msg_int = client.post("/api/webhook/whatsapp", json={"message": 12345})
+    assert res_msg_int.status_code == 200
+    data_msg = res_msg_int.json()
+    assert data_msg["status"] == "success"
+    assert "threat_level" in data_msg
+
+    # Integer in filename
+    res_fn_int = client.post("/api/webhook/whatsapp", json={"filename": 12345})
+    assert res_fn_int.status_code == 200
+    data_fn = res_fn_int.json()
+    assert data_fn["status"] == "success"
+    assert "threat_level" in data_fn
+
+    # Integer in from and message
+    res_combo = client.post("/api/webhook/whatsapp", json={"from": 919876543210, "message": 99999})
+    assert res_combo.status_code == 200
+    data_combo = res_combo.json()
+    assert data_combo["status"] == "success"
+    assert data_combo["sender"] == "919876543210"
+
+
+

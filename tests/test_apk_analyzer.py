@@ -41,3 +41,27 @@ def test_sample_apk_static_inspection():
 def test_corrupt_or_empty_apk():
     result = APKAnalyzer.analyze_bytes(b"not_a_zip", filename="random_test.apk")
     assert result["metadata"].is_valid_zip is False
+
+
+def test_dalvik_bytecode_dex_scanning():
+    """Verify that dangerous permissions and C2 endpoints compiled into classes.dex are detected."""
+    import io
+    import zipfile
+
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w") as z:
+        z.writestr("AndroidManifest.xml", b'package="com.stealth.bot"')
+        z.writestr("classes.dex", b"api.telegram.org/bot123456:ABC/sendMessage android.permission.RECEIVE_SMS")
+
+    result = APKAnalyzer.analyze_bytes(buf.getvalue(), filename="StealthBot.apk")
+    assert result["is_malicious"] is True
+    assert result["score"] >= 50
+
+    # Verify Telegram C2 indicator found
+    assert any("Telegram Bot" in e.indicator for e in result["evidence"])
+
+    # Verify RECEIVE_SMS detected from classes.dex
+    detected_perms = [p.permission for p in result["metadata"].dangerous_permissions]
+    assert "android.permission.RECEIVE_SMS" in detected_perms
+    assert "SMS Stealer" in result["metadata"].trojan_classification
+

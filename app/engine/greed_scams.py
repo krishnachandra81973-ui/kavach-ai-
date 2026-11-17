@@ -83,9 +83,7 @@ class GreedScamAnalyzer:
         target = url_str if url_str.startswith(("http://", "https://")) else f"https://{url_str}"
         try:
             parsed = urlparse(target)
-            domain = parsed.netloc.lower()
-            if ":" in domain:
-                domain = domain.split(":")[0]
+            domain = (parsed.hostname or "").lower()
         except Exception:
             domain = url_str.lower()
 

@@ -36,8 +36,10 @@ class ForensicOrchestrator:
         """
         End-to-end analysis method handling both text, uploaded files, and APKs.
         """
-        text_content = (text or "").strip()
-        filename_lower = (filename or "").lower()
+        text_str = str(text) if text is not None else ""
+        text_content = text_str.strip()
+        filename_str = str(filename) if filename else ""
+        filename_lower = filename_str.lower()
 
         # Is this an APK file?
         is_apk = (
@@ -49,10 +51,10 @@ class ForensicOrchestrator:
         # 1. APK STATIC ANALYSIS
         apk_result: Optional[Dict[str, Any]] = None
         if is_apk and file_bytes:
-            apk_result = APKAnalyzer.analyze_bytes(file_bytes, filename=filename or "app.apk")
+            apk_result = APKAnalyzer.analyze_bytes(file_bytes, filename=filename_str or "app.apk")
         elif filename_lower.endswith(".apk") and not file_bytes:
             # Filename only or text describing an APK
-            apk_result = APKAnalyzer.analyze_bytes(b"", filename=filename or "app.apk")
+            apk_result = APKAnalyzer.analyze_bytes(b"", filename=filename_str or "app.apk")
 
         # 2. DIGITAL ARREST HEURISTICS
         digital_arrest_res = DigitalArrestAnalyzer.analyze(text_content)
@@ -146,11 +148,11 @@ class ForensicOrchestrator:
             title_en = "MALICIOUS MALWARE: High-Risk Android Trojan / Dropper"
             title_hi = "खतरनाक वायरस: बैंकिंग ट्रोजन / दुर्भावनापूर्ण APK ऐप"
             summary_en = (
-                f"The file '{filename or 'APK'}' is a deceptive Android malware package designed to steal bank OTPs, "
+                f"The file '{filename_str or 'APK'}' is a deceptive Android malware package designed to steal bank OTPs, "
                 "intercept confidential SMS, and abuse accessibility permissions to take over your device."
             )
             summary_hi = (
-                f"फाइल '{filename or 'APK'}' एक खतरनाक एंड्रॉइड वायरस (ट्रोजन) है जो आपके बैंक ओटीपी और एसएमएस "
+                f"फाइल '{filename_str or 'APK'}' एक खतरनाक एंड्रॉइड वायरस (ट्रोजन) है जो आपके बैंक ओटीपी और एसएमएस "
                 "चुराने तथा फोन पर अनधिकृत नियंत्रण पाने के लिए तैयार किया गया है।"
             )
 

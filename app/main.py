@@ -244,6 +244,12 @@ async def handle_whatsapp_webhook(request: Request):
     except Exception:
         body = {}
 
+    if not isinstance(body, dict):
+        return JSONResponse(
+            content={"status": "ignored", "reason": "Payload must be a JSON object"},
+            status_code=200
+        )
+
     extracted_text = ""
     sender_phone = ""
     extracted_filename = None
@@ -251,20 +257,20 @@ async def handle_whatsapp_webhook(request: Request):
     # Parse standard Meta WhatsApp Cloud API payload format
     try:
         entries = body.get("entry", [])
-        if entries:
-            changes = entries[0].get("changes", [])
-            if changes:
-                value = changes[0].get("value", {})
-                messages = value.get("messages", [])
-                if messages:
-                    msg = messages[0]
+        if entries and isinstance(entries, list):
+            changes = entries[0].get("changes", []) if isinstance(entries[0], dict) else []
+            if changes and isinstance(changes, list):
+                value = changes[0].get("value", {}) if isinstance(changes[0], dict) else {}
+                messages = value.get("messages", []) if isinstance(value, dict) else []
+                if messages and isinstance(messages, list):
+                    msg = messages[0] if isinstance(messages[0], dict) else {}
                     sender_phone = msg.get("from", "")
                     if msg.get("type") == "text":
                         extracted_text = msg.get("text", {}).get("body", "")
                     elif msg.get("type") == "image":
                         extracted_text = msg.get("image", {}).get("caption", "WhatsApp Image forwarded for forensic audit")
                     elif msg.get("type") == "document":
-                        doc = msg.get("document", {})
+                        doc = msg.get("document", {}) if isinstance(msg.get("document"), dict) else {}
                         extracted_filename = doc.get("filename")
                         extracted_text = doc.get("caption") or extracted_filename or "WhatsApp Document"
     except Exception:
@@ -276,6 +282,13 @@ async def handle_whatsapp_webhook(request: Request):
         sender_phone = body.get("from") or body.get("From") or sender_phone
     if not extracted_filename:
         extracted_filename = body.get("filename")
+
+    if extracted_text is not None and not isinstance(extracted_text, str):
+        extracted_text = str(extracted_text)
+    if extracted_filename is not None and not isinstance(extracted_filename, str):
+        extracted_filename = str(extracted_filename)
+    if sender_phone is not None and not isinstance(sender_phone, str):
+        sender_phone = str(sender_phone)
 
     if not extracted_text.strip() and not extracted_filename:
         return JSONResponse(

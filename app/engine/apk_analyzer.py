@@ -71,7 +71,8 @@ class APKAnalyzer:
         """
         Check if the APK filename mimics known social-engineering lures in India.
         """
-        clean_name = filename.lower()
+        filename_str = str(filename) if filename else ""
+        clean_name = filename_str.lower()
         is_suspicious_name = False
         matched_pattern = ""
 
@@ -91,6 +92,7 @@ class APKAnalyzer:
         """
         Analyze APK raw bytes via static extraction.
         """
+        filename_str = str(filename) if filename else "sample.apk"
         file_size = len(file_bytes)
         score = 0
         evidence: List[ForensicEvidence] = []
@@ -101,15 +103,15 @@ class APKAnalyzer:
         all_perms_found: Set[str] = set()
 
         # 1. Filename heuristic
-        name_risk = cls.check_filename_risk(filename)
+        name_risk = cls.check_filename_risk(filename_str)
         if name_risk["is_suspicious_name"]:
             score += 35
-            detected_indicators.append(f"Deceptive Indian Social Engineering Lure: {filename}")
+            detected_indicators.append(f"Deceptive Indian Social Engineering Lure: {filename_str}")
             evidence.append(ForensicEvidence(
                 indicator="Deceptive APK Lure (Wedding Card / Utility Scam)",
                 severity="HIGH",
-                detail_en=f"File name '{filename}' mimics deceptive lures (e.g. Wedding invitation, Electricity bill update, Challan payment) used to spread malware via WhatsApp.",
-                detail_hi=f"फाइल का नाम '{filename}' शादी के निमंत्रण या बिजली बिल जैसे लोकप्रिय धोखे की नकल कर रहा है।"
+                detail_en=f"File name '{filename_str}' mimics deceptive lures (e.g. Wedding invitation, Electricity bill update, Challan payment) used to spread malware via WhatsApp.",
+                detail_hi=f"फाइल का नाम '{filename_str}' शादी के निमंत्रण या बिजली बिल जैसे लोकप्रिय धोखे की नकल कर रहा है।"
             ))
 
         # 2. Check if valid ZIP / APK structure
@@ -135,8 +137,18 @@ class APKAnalyzer:
                     manifest_strings = cls.extract_strings_from_bytes(manifest_data)
                     manifest_raw_text = manifest_data.decode("utf-8", errors="ignore")
 
-                # Scan for permissions in manifest or DEX
-                strings_to_scan = manifest_strings
+                # Read and extract strings from all .dex files in the ZIP archive
+                dex_strings: List[str] = []
+                for name in namelist:
+                    if name.endswith(".dex"):
+                        try:
+                            dex_data = z.read(name)
+                            dex_strings.extend(cls.extract_strings_from_bytes(dex_data))
+                        except Exception:
+                            continue
+
+                # Combine manifest strings and DEX bytecode strings
+                strings_to_scan = manifest_strings + dex_strings
                 if not strings_to_scan:
                     # Fallback to scanning first 2MB of entire archive
                     strings_to_scan = cls.extract_strings_from_bytes(file_bytes[:2_000_000])
@@ -185,7 +197,7 @@ class APKAnalyzer:
             # File might not be a valid zip, or could be a raw text/script/corrupt APK
             detected_indicators.append("File is not a valid ZIP/APK archive (possibly disguised or truncated)")
             # If the filename ends with .apk or matches suspicious lures, it's already an alert
-            if filename.lower().endswith(".apk"):
+            if filename_str.lower().endswith(".apk"):
                 score += 20
                 evidence.append(ForensicEvidence(
                     indicator="Disguised or Non-Standard APK File",
@@ -230,7 +242,7 @@ class APKAnalyzer:
         is_malicious = bool(score >= 50 or trojan_classification is not None)
 
         apk_metadata = APKMetadata(
-            filename=filename,
+            filename=filename_str,
             file_size_bytes=file_size,
             is_valid_zip=is_valid_zip,
             package_name=package_name or "Unknown / Obfuscated",
